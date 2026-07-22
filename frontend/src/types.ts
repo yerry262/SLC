@@ -66,3 +66,9 @@ export interface WalletsSnapshot {
   wallets: Wallet[]
   notes: string[]
 }
+
+export interface PriceSnapshot {
+  generatedAt: string
+  source: string
+  ethUsd: number
+}

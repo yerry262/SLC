@@ -1,4 +1,6 @@
 import earningsData from '../data/earnings.json'
+import priceData from '../data/price.json'
+import type { PriceSnapshot } from '../types'
 import './EarningsPanel.css'
 
 interface EarningsScanWindow {
@@ -34,9 +36,14 @@ interface EarningsSnapshot {
 }
 
 const earnings = earningsData as EarningsSnapshot
+const price = priceData as PriceSnapshot
 
 function truncateHex(value: string) {
   return value.length > 16 ? `${value.slice(0, 8)}…${value.slice(-6)}` : value
+}
+
+function formatUsd(usd: number) {
+  return usd.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 2 })
 }
 
 function formatGeneratedAt(iso: string) {
@@ -86,6 +93,11 @@ export function EarningsPanel() {
           <dd className="earnings-panel__stat--cyan">
             {confirmedTipsSum.toFixed(4)} <span className="earnings-panel__unit">ETH</span>
           </dd>
+          {price && (
+            <span className="earnings-panel__stat-usd" title={`1 ETH ≈ ${formatUsd(price.ethUsd)} (${price.source})`}>
+              ≈ {formatUsd(confirmedTipsSum * price.ethUsd)}
+            </span>
+          )}
           <span className="earnings-panel__stat-sub">measured, not lifetime</span>
         </dl>
 
