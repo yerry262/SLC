@@ -1,14 +1,19 @@
-import type { Validator, EarningsSnapshot } from '../types'
+import type { Validator, EarningsSnapshot, PriceSnapshot } from '../types'
 import './FleetSummary.css'
 
 interface FleetSummaryProps {
   validators: Validator[]
   earnings: EarningsSnapshot
+  price?: PriceSnapshot
 }
 
 const STAKE_PER_VALIDATOR = 32
 
-export function FleetSummary({ validators, earnings }: FleetSummaryProps) {
+function formatUsd(usd: number) {
+  return usd.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+}
+
+export function FleetSummary({ validators, earnings, price }: FleetSummaryProps) {
   const active = validators.filter((v) => v.status === 'active')
   const totalBalance = validators.reduce((sum, v) => sum + v.balanceEth, 0)
   const baseStake = active.length * STAKE_PER_VALIDATOR
@@ -32,6 +37,11 @@ export function FleetSummary({ validators, earnings }: FleetSummaryProps) {
         <dd>
           {totalBalance.toFixed(4)} <span className="fleet-summary__unit">ETH</span>
         </dd>
+        {price && (
+          <span className="fleet-summary__stat-usd" title={`1 ETH ≈ ${formatUsd(price.ethUsd)} (${price.source})`}>
+            ≈ {formatUsd(totalBalance * price.ethUsd)}
+          </span>
+        )}
       </dl>
 
       <div className="fleet-summary__breakdown">

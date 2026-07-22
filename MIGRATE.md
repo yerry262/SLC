@@ -228,24 +228,42 @@ is still an empty/placeholder state.
 **Goal:** close the two gaps that are pure "read more from the node we
 already talk to" work, no external API decisions needed.
 
-- [ ] `scripts/fetch_wallets.py`: `eth_getBalance` against the 13 tip-jar
+- [x] `scripts/fetch_wallets.py`: `eth_getBalance` against the 13 tip-jar
       wallet addresses + deployer address (see `Varibles.py`'s
       `wallet_addresses`/`wallet_alias` for the old hardcoded list — verify
       each address is still live/current before reusing it, this data is
       2024-era), following `fetch_fleet.py`'s conventions (env-var secrets,
       retry wrapper, node-direct over `ethereum-wg`).
       → `frontend/src/data/wallets.json` + `Wallets` type in `types.ts`.
-- [ ] "ETH until next validator" countdown: compute client-side from
+      **Script done 2026-07-22.** `wallets.json`'s committed content is
+      **hand-written sample/fixture data**, not a real run — the addresses
+      themselves have not actually been re-verified against the live node
+      yet (this migration work happened off-node, no `ethereum-wg` access).
+      Run the script for real against the node before trusting these
+      figures; a failed/dead address is written as `balanceEth: null` with
+      an explicit unavailable-count notice in the UI, not silently dropped.
+- [x] "ETH until next validator" countdown: compute client-side from
       `wallets.json`'s total, not stored as a snapshot field (it's a pure
       function of the balance and the 32 ETH threshold, storing it risks it
-      going stale relative to the balance it was computed from).
-- [ ] Wire `/wallets` to real data.
-- [ ] ETH→USD: add a price fetch to one of the existing `scripts/fetch_*.py`
+      going stale relative to the balance it was computed from). **Done
+      2026-07-22** — `frontend/src/pages/walletsMath.ts`, a pure function,
+      not persisted anywhere.
+- [x] Wire `/wallets` to real data. **Done 2026-07-22** —
+      `frontend/src/pages/WalletsPage.tsx`, mounted at `/wallets` in
+      `routing/routes.tsx`. "Real" per the caveat above: wired to the
+      wallets-data pipeline and shape, not yet to a live node run.
+- [x] ETH→USD: add a price fetch to one of the existing `scripts/fetch_*.py`
       scripts (CoinGecko's public endpoint is a reasonable no-key default;
       if CoinMarketCap is preferred, it needs a **fresh** key via
       `os.environ`, never hardcoded — see the secrets warning above).
       Thread `ethPrice` through as an optional secondary figure on existing
       panels (`FleetSummary`, `EarningsPanel`) rather than a new page.
+      **Done 2026-07-22** — new `scripts/fetch_price.py`, defaults to
+      CoinGecko's no-key endpoint; `frontend/src/data/price.json` +
+      `PriceSnapshot` type. `FleetSummary` takes `price` as an optional prop
+      (wired from `Dashboard.tsx`); `EarningsPanel` imports `price.json`
+      directly. `price.json`'s committed value is a hand-written sample
+      too, same caveat as `wallets.json` above.
 
 ### Stage 7 — Charting library + rewards depth
 

@@ -46,6 +46,14 @@
   font-weight: 500;
 }
 
+.fleet-summary__stat-usd {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
 .fleet-summary__breakdown {
   display: flex;
   flex-direction: column;

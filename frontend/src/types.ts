@@ -52,3 +52,23 @@ export interface EarningsSnapshot {
   validators: EarningsValidator[]
   notes: string[]
 }
+
+export interface Wallet {
+  address: string
+  alias: string
+  balanceEth: number | null
+}
+
+export interface WalletsSnapshot {
+  generatedAt: string
+  method: string
+  nodeSource: string
+  wallets: Wallet[]
+  notes: string[]
+}
+
+export interface PriceSnapshot {
+  generatedAt: string
+  source: string
+  ethUsd: number
+}
