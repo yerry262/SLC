@@ -201,20 +201,23 @@ is still an empty/placeholder state.
       highlighted in `--cyan`. `/` now renders `Dashboard.tsx` (today's old
       `App.tsx` content, relocated unchanged); `App.tsx` itself became the
       router shell.
-- [ ] Port `Validator_Mission.ipynb`'s static copy to `/mission` — pure
-      content, no data wiring. **Not done in this PR** — `/mission` renders
-      the shared placeholder below for now; real Mission copy is separate,
-      parallel work (along with `/wallets` real content) and lands in its
-      own PR. Swapping it in is a one-line change in `routing/routes.tsx`.
+- [x] Port `Validator_Mission.ipynb`'s static copy to `/mission` — pure
+      content, no data wiring. **Done 2026-07-22** —
+      `frontend/src/pages/MissionPage.tsx`, ported faithfully (mission
+      statement, POAP badges, economic-incentives explainer); the one or two
+      inline live-figure citations (market cap, ETH price) render as an
+      explicit "not wired up yet" placeholder rather than a fabricated
+      number, since that fetch isn't built yet (Stage 6). Mounted at
+      `/mission` in `routing/routes.tsx`, replacing its `ComingSoon` stub.
 - [x] Give `/blocks`, `/staking-calculator`, `/investor-calculator`, and
       `/wallets` a consistent honest empty state (see "Empty-state
       convention" above) rather than leaving them blank or building
       placeholder data. **Done 2026-07-22** — shared `ComingSoon.tsx`
       component, one instance per route with a specific (not generic)
-      explanation of what's missing. Also used for `/mission` and `/rewards`
-      for now, since neither has real content in this PR either (see above
-      and the `/rewards` row's own "most likely appears in both" note —
-      that decision is still open, not resolved by this stage).
+      explanation of what's missing. Also used for `/rewards` for now (see
+      the `/rewards` row's own "most likely appears in both" note — that
+      decision is still open, not resolved by this stage); `/mission` was
+      also using it until the Mission port above landed in this same PR.
 - [x] Confirm `/investor-calculator` renders its empty state only — no real
       investor dollar figures, no data file — per the deferral above.
       **Confirmed 2026-07-22** — `ComingSoon` placeholder only, no data file

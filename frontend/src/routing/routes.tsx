@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react'
 import { Dashboard } from '../pages/Dashboard'
+import { MissionPage } from '../pages/MissionPage'
 import { ComingSoon } from '../components/ComingSoon'
 
 export interface RouteConfig {
@@ -26,12 +27,7 @@ export const routes: RouteConfig[] = [
   {
     path: '/mission',
     label: 'Our Mission',
-    element: (
-      <ComingSoon
-        title="Our Mission"
-        description="Carries the old dashboard's static about/mission copy (Validator_Mission.ipynb) — no data dependency, just not yet written into this build."
-      />
-    ),
+    element: <MissionPage />,
   },
   {
     path: '/rewards',
