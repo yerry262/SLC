@@ -140,14 +140,17 @@ Notes for whoever builds the nav shell (Stage 5):
    has no equivalent in SLC yet; every figure today is ETH-only. → **Stage 6**
 5. **Static "About/Mission" content** (`Validator_Mission.ipynb`) — no data
    gap, just not yet written into the new frontend. Cheapest item on this
-   list. → **Stage 5**
+   list. → **Stage 5** (nav shell done 2026-07-22; the actual Mission copy
+   is separate, parallel work, still open — `/mission` shows the shared
+   placeholder for now)
 6. **Charting library decision** — the old dashboard used Plotly + matplotlib
    (interactive block charts, investor allocation charts, relay pie chart,
    US visitor map). SLC's `frontend/package.json` has no charting dependency
    yet. Needed before porting `Validator_Staking_Blocks.ipynb`'s interactive
    chart or any investor chart (if that scope is ever approved). → **Stage 7**
 7. **Persistent top navigation** — SLC is currently one scrolling page;
-   the old dashboard's button-per-section menu isn't reproduced yet. → **Stage 5**
+   the old dashboard's button-per-section menu isn't reproduced yet.
+   → **Stage 5 — done 2026-07-22.** `NavBar.tsx` + hash routing, 7 routes.
 
 ## Migration stages
 
@@ -180,21 +183,42 @@ and collide with it:
 every button from `Main_Menu.ipynb` present, even where the page behind it
 is still an empty/placeholder state.
 
-- [ ] Pick a routing approach (hash routing vs. path routing + `404.html`
-      SPA fallback) — see "Target site structure" above.
-- [ ] Build `NavBar.tsx`, wire up all 6 routes (`/`, `/mission`, `/rewards`,
+- [x] Pick a routing approach (hash routing vs. path routing + `404.html`
+      SPA fallback) — see "Target site structure" above. **Done 2026-07-22:
+      hash routing** (`#/rewards`, hand-rolled ~30-line `useHashRoute` hook,
+      no library). The 404.html SPA-fallback trick does exist once elsewhere
+      in the workspace (`Spotify-Webapp-Visualizer/public/404.html`), but
+      turned out to be vestigial there — that repo has no router at all
+      (no react-router, no `<Route>` usage), so it wasn't actually a proven
+      convention to reuse. Path routing would also have been the first time
+      this repo's Vite `base` (still unset; site hasn't deployed yet) got
+      exercised against the real `/SLC/` subpath — hash routing sidesteps
+      both the fallback file and the `base` question entirely.
+- [x] Build `NavBar.tsx`, wire up all 7 routes (`/`, `/mission`, `/rewards`,
       `/blocks`, `/staking-calculator`, `/investor-calculator`, `/wallets`),
-      matching the existing dark/cyan design system.
+      matching the existing dark/cyan design system. **Done 2026-07-22** —
+      `frontend/src/components/NavBar.tsx`, hash-link buttons, active-route
+      highlighted in `--cyan`. `/` now renders `Dashboard.tsx` (today's old
+      `App.tsx` content, relocated unchanged); `App.tsx` itself became the
+      router shell.
 - [ ] Port `Validator_Mission.ipynb`'s static copy to `/mission` — pure
-      content, no data wiring. (Optional: thread through an ETH price for
-      the one or two figures that cite it — fine to stub as a placeholder
-      until Stage 6's price fetch lands, don't block on it.)
-- [ ] Give `/blocks`, `/staking-calculator`, `/investor-calculator`, and
+      content, no data wiring. **Not done in this PR** — `/mission` renders
+      the shared placeholder below for now; real Mission copy is separate,
+      parallel work (along with `/wallets` real content) and lands in its
+      own PR. Swapping it in is a one-line change in `routing/routes.tsx`.
+- [x] Give `/blocks`, `/staking-calculator`, `/investor-calculator`, and
       `/wallets` a consistent honest empty state (see "Empty-state
       convention" above) rather than leaving them blank or building
-      placeholder data.
-- [ ] Confirm `/investor-calculator` renders its empty state only — no real
+      placeholder data. **Done 2026-07-22** — shared `ComingSoon.tsx`
+      component, one instance per route with a specific (not generic)
+      explanation of what's missing. Also used for `/mission` and `/rewards`
+      for now, since neither has real content in this PR either (see above
+      and the `/rewards` row's own "most likely appears in both" note —
+      that decision is still open, not resolved by this stage).
+- [x] Confirm `/investor-calculator` renders its empty state only — no real
       investor dollar figures, no data file — per the deferral above.
+      **Confirmed 2026-07-22** — `ComingSoon` placeholder only, no data file
+      added anywhere in this change.
 
 ### Stage 6 — Liquid wallet balances + ETH→USD
 
@@ -291,7 +315,9 @@ would go, if approved. Needs, at minimum:
 
 Written 2026-07-22, based on a read-through of every notebook/module in
 `SLC-DASHBOARD-2024` as of that date. Expanded same day with the target nav
-structure and Stages 5–9. Nothing in Stages 5–9 has been started yet — this
-is the plan, not a progress log. Check off checklist items and update table
-rows as each piece actually lands; don't let this drift into fiction the way
-a stale status doc does.
+structure and Stages 5–9. **Stage 5's nav shell landed 2026-07-22** (hash
+routing, `NavBar.tsx`, 7 routes, shared `ComingSoon` placeholder) — Mission
+copy and real Wallets content are separate, still-open work within the same
+stage. Stages 6–9 haven't been started. Check off checklist items and update
+table rows as each piece actually lands; don't let this drift into fiction
+the way a stale status doc does.
