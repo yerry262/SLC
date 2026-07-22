@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import { Dashboard } from '../pages/Dashboard'
 import { MissionPage } from '../pages/MissionPage'
+import { RewardsPage } from '../pages/RewardsPage'
 import { WalletsPage } from '../pages/WalletsPage'
 import { ComingSoon } from '../components/ComingSoon'
 
@@ -33,12 +34,7 @@ export const routes: RouteConfig[] = [
   {
     path: '/rewards',
     label: 'Our Rewards',
-    element: (
-      <ComingSoon
-        title="Our Rewards"
-        description="A fuller rewards view — APR (7d/31d/365d), ROI%, and consensus-layer reward figures — is planned here. Those need either a paid beaconcha.in API plan or a from-chain CL-reward computation, neither wired up yet. What's already measured (EL tips in the recent scan window) lives in the Earnings panel on the Dashboard."
-      />
-    ),
+    element: <RewardsPage />,
   },
   {
     path: '/blocks',

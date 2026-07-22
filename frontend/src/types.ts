@@ -72,3 +72,32 @@ export interface PriceSnapshot {
   source: string
   ethUsd: number
 }
+
+export interface RewardsValidator {
+  index: number
+  pubkey: string
+  status: string
+  daysSinceActivation: number | null
+  clRewardEth: number | null
+  roiPct: number | null
+  annualizedPct: number | null
+  unavailableReason: string | null
+}
+
+export interface RewardsFleetSummary {
+  validatorsTracked: number
+  validatorsTotal: number
+  totalClRewardEth: number
+  avgRoiPct: number | null
+  avgAnnualizedPct: number | null
+}
+
+export interface RewardsSnapshot {
+  generatedAt: string
+  method: string
+  sourceFleetGeneratedAt: string
+  baseStakeEth: number
+  fleetSummary: RewardsFleetSummary
+  validators: RewardsValidator[]
+  notes: string[]
+}
