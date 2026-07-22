@@ -1,0 +1,47 @@
+.fleet-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  height: fit-content;
+}
+
+.fleet-summary__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.fleet-summary__stat {
+  margin: 0;
+}
+
+.fleet-summary__stat dt {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fleet-summary__stat dd {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--cyan);
+}
+
+.fleet-summary__unit {
+  font-size: 16px;
+  color: var(--text-dim);
+  font-weight: 500;
+}

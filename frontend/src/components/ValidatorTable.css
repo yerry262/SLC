@@ -1,0 +1,80 @@
+.validator-table {
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+}
+
+.validator-table__title {
+  margin: 0;
+  padding: 20px 24px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--hairline);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 10px 24px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.validator-table__status-col {
+  width: 40px;
+}
+
+td {
+  padding: 14px 24px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 14px;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.validator-table__pubkey,
+td:nth-child(3),
+td:nth-child(4) {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.validator-table__dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.validator-table__dot--active {
+  background: var(--amber);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--amber) 60%, transparent);
+}
+
+.validator-table__dot--pending {
+  background: var(--cyan);
+}
+
+.validator-table__dot--exited,
+.validator-table__dot--slashed {
+  background: var(--coral);
+}
+
+@media (max-width: 720px) {
+  .validator-table {
+    overflow-x: auto;
+  }
+}
