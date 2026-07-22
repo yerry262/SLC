@@ -1,7 +1,15 @@
-import type { FleetSnapshot } from '../types'
+import type { FleetSnapshot, ValidatorStatus } from '../types'
 
-// Placeholder data for the Stage 1 layout pass — replaced in Stage 2 by a
-// real snapshot generated from the local node (see project plan).
+// Real one-off snapshot pulled directly from the node (Prysm metrics +
+// beacon API) on 2026-07-22 during Stage 1 verification — all 13 of our
+// validators, not fabricated placeholders. Stage 2 replaces this file with
+// an automated fetch script that regenerates it from the same source.
+// Slot-strip data is still illustrative — real proposal history is Stage 4.
+
+function status(s: 'active_ongoing' | 'withdrawal_done'): ValidatorStatus {
+  return s === 'active_ongoing' ? 'active' : 'exited'
+}
+
 export const mockFleet: FleetSnapshot = {
   currentEpoch: 41891,
   slots: Array.from({ length: 32 }, (_, slot) => ({
@@ -10,29 +18,18 @@ export const mockFleet: FleetSnapshot = {
     missed: slot === 17,
   })),
   validators: [
-    {
-      index: 166200,
-      pubkey: '0x820bbe4c8c19d21f0cf32257ced118aa43badb9c768d7854cc91f79b72f3d5472f47eab1b54477eb72fbb3ff10eeaebf',
-      status: 'active',
-      balanceEth: 32.7205,
-      activationEpoch: 44062,
-      daysOnline: 1878,
-    },
-    {
-      index: 166201,
-      pubkey: '0x8007ad5fb5308d01886cf4fed6b7878a423e4f5619889e193f0e2ff0f70d4ba549553cfa76ed6702cb50dd50cb3d8570',
-      status: 'active',
-      balanceEth: 34.1256,
-      activationEpoch: 44070,
-      daysOnline: 1878,
-    },
-    {
-      index: 166202,
-      pubkey: '0x85e97d5a9bf9b934bd83a5b399ebe9e39bbaba6d686119d2f01d1ecf5a038a8932089ba505399d46d0dc62090fd9a101',
-      status: 'exited',
-      balanceEth: 0,
-      activationEpoch: 44075,
-      daysOnline: 1200,
-    },
+    { index: 2032648, pubkey: '0x8007ad5fb5308d01886cf4fed6b7878a423e4f5619889e193f0e2ff0f70d4ba549553cfa76ed6702cb50dd50cb3d8570', status: status('active_ongoing'), balanceEth: 34.1257, activationEpoch: 382800, daysOnline: 357 },
+    { index: 166200, pubkey: '0x820bbe4c8c19d21f0cf32257ced118aa43badb9c768d7854cc91f79b72f3d5472f47eab1b54477eb72fbb3ff10eeaebf', status: status('active_ongoing'), balanceEth: 32.7206, activationEpoch: 44062, daysOnline: 1863 },
+    { index: 590171, pubkey: '0x85e97d5a9bf9b934bd83a5b399ebe9e39bbaba6d686119d2f01d1ecf5a038a8932089ba505399d46d0dc62090fd9a101', status: status('withdrawal_done'), balanceEth: 0, activationEpoch: 197013, daysOnline: 1183 },
+    { index: 27235, pubkey: '0x8aab72c29ac42a82a82b5246e1ea6a796507659b5f81cc026dba03794300765356dfffab9fe167141441c468c98f1f38', status: status('active_ongoing'), balanceEth: 32.7357, activationEpoch: 1588, daysOnline: 2051 },
+    { index: 88498, pubkey: '0x8d8d931090b195f2705e45310fcdf30d0e6ec8a12dbda8fba6bbc2c5049b4b3649fd296ccd59fcd6fdc31a1d78140ea3', status: status('active_ongoing'), balanceEth: 32.6368, activationEpoch: 16903, daysOnline: 1983 },
+    { index: 47553, pubkey: '0x9055d6b87e8b88e9d47c5bafc7eb29f38222dceb741d46a0b2bb38626bc0e30dd05fd5c554d018e44e42d372b160a432', status: status('active_ongoing'), balanceEth: 32.7846, activationEpoch: 6667, daysOnline: 2029 },
+    { index: 73354, pubkey: '0x929421db53064c729ed6102bef7bf64fc76740f11f9eb21575aae70cd77878b20c69bdb1852ff922b909a24be3b4dc06', status: status('withdrawal_done'), balanceEth: 0, activationEpoch: 13117, daysOnline: 2000 },
+    { index: 89972, pubkey: '0x93434087d139ff77050c1581e2eb550c8377fcb751fd9e07c907c8bda7e4aad61e9f2bdca19fed256ff643a35cb85cac', status: status('active_ongoing'), balanceEth: 32.7781, activationEpoch: 17272, daysOnline: 1982 },
+    { index: 23109, pubkey: '0x958950947f7cbdc728e09ba04ea38fafed0cab665ff93b4e177fbb37ef31744c3b8cd25d40d5fe347501636fde7406ca', status: status('active_ongoing'), balanceEth: 32.5902, activationEpoch: 556, daysOnline: 2056 },
+    { index: 81070, pubkey: '0xa14fbb4bd79bc63145a0647e2ecdb1f7328be89012e139aa0fc5870a3831287302fa53c03703bfe7a46254c590acc426', status: status('withdrawal_done'), balanceEth: 0, activationEpoch: 15046, daysOnline: 1991 },
+    { index: 1131947, pubkey: '0xa3095f33917c50deb0cd877c34a78f27686abc0db8ac42ca1c51791ab67f550f5fb172854c877a190e0516aba0486700', status: status('withdrawal_done'), balanceEth: 0, activationEpoch: 256817, daysOnline: 917 },
+    { index: 111185, pubkey: '0xa60c6701d3b3686987a8dcbad2367fd7e0919983f99cddc8c8c3f21f89a12fdb53f69dec876f7bac4833fb19a5238649', status: status('active_ongoing'), balanceEth: 32.7304, activationEpoch: 25008, daysOnline: 1947 },
+    { index: 27234, pubkey: '0xb77c8d32b8354efde754708005d132693ee43d93a71b1dddba4a63681c42aa2bb4b29f6347761c492b70f784c9b8ba85', status: status('active_ongoing'), balanceEth: 32.6874, activationEpoch: 1587, daysOnline: 2051 },
   ],
 }
