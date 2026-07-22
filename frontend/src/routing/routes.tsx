@@ -3,6 +3,7 @@ import { Dashboard } from '../pages/Dashboard'
 import { MissionPage } from '../pages/MissionPage'
 import { RewardsPage } from '../pages/RewardsPage'
 import { WalletsPage } from '../pages/WalletsPage'
+import { BlocksPage } from '../pages/BlocksPage'
 import { ComingSoon } from '../components/ComingSoon'
 
 export interface RouteConfig {
@@ -39,12 +40,7 @@ export const routes: RouteConfig[] = [
   {
     path: '/blocks',
     label: 'Our Blocks',
-    element: (
-      <ComingSoon
-        title="Our Blocks"
-        description="Full lifetime block-proposal history per validator (block/MEV reward, relay tag, gas used) isn't tracked yet. It requires exporting data from the validator client's local slashing-protection database, which means briefly stopping the live validator service — not yet scheduled."
-      />
-    ),
+    element: <BlocksPage />,
   },
   {
     path: '/staking-calculator',

@@ -1,0 +1,38 @@
+{
+  "scannedRanges": [
+    [9000000, 9020000],
+    [14803729, 14823808]
+  ],
+  "confirmedProposals": [
+    {
+      "slot": 9004213,
+      "validatorIndex": 166200,
+      "blockNumber": 19841203,
+      "miner": "0x26c4d9c0982edc7f8fb32f428159a4ba17060a93",
+      "matchesExpectedFeeRecipient": true,
+      "priorityFeeRevenueEth": 0.041237,
+      "txCount": 187,
+      "builderPaymentNote": null
+    },
+    {
+      "slot": 9011987,
+      "validatorIndex": 88498,
+      "blockNumber": 19848744,
+      "miner": "0xc56b8d60b0518880ff5aab65515b845dad89443d",
+      "matchesExpectedFeeRecipient": true,
+      "priorityFeeRevenueEth": 0.019844,
+      "txCount": 142,
+      "builderPaymentNote": "last tx is a plain 21000-gas transfer (possible builder payment, unverified heuristic)"
+    },
+    {
+      "slot": 9017502,
+      "validatorIndex": 27234,
+      "blockNumber": 19854093,
+      "miner": "0xaf5da15c219df670acb8eb67e461505c23fc04c1",
+      "matchesExpectedFeeRecipient": true,
+      "priorityFeeRevenueEth": 0.056721,
+      "txCount": 203,
+      "builderPaymentNote": null
+    }
+  ]
+}

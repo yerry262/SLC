@@ -73,6 +73,33 @@ export interface PriceSnapshot {
   ethUsd: number
 }
 
+export interface BlockProposal {
+  slot: number
+  validatorIndex: number
+  validatorPubkey: string | null
+  blockNumber: number | null
+  priorityFeeRevenueEth: number | null
+  builderPaymentNote: string | null
+  revenueError: string | null
+}
+
+export interface BlocksSnapshot {
+  generatedAt: string
+  method: string
+  depositAddress: string
+  scanProgress: {
+    headSlot: number
+    oldestValidatorActivationSlot: number
+    scannedRanges: [number, number][]
+    slotsScannedTotal: number
+    fullHistoryComplete: boolean
+  }
+  proposals: BlockProposal[]
+  totalConfirmedProposals: number
+  totalPriorityFeeRevenueEth: number
+  notes: string[]
+}
+
 export interface RewardsValidator {
   index: number
   pubkey: string
