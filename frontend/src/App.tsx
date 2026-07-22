@@ -1,4 +1,5 @@
 import { NavBar } from './components/NavBar'
+import { SiteFooter } from './components/SiteFooter'
 import { useHashRoute } from './routing/useHashRoute'
 import { routes, defaultRoute } from './routing/routes'
 import './App.css'
@@ -13,6 +14,7 @@ function App() {
     <div className="app-shell">
       <NavBar routes={routes} currentPath={route.path} />
       <main className="app-shell__main">{route.element}</main>
+      <SiteFooter />
     </div>
   )
 }
