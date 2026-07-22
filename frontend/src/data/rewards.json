@@ -1,0 +1,153 @@
+{
+  "generatedAt": "2026-07-22T19:23:25.891116+00:00",
+  "method": "computed from frontend/src/data/fleet.json's balanceEth/activationEpoch fields (no live node call, no beaconcha.in call \u2014 see notes)",
+  "sourceFleetGeneratedAt": "2026-07-22T08:44:46.888822+00:00",
+  "baseStakeEth": 32.0,
+  "fleetSummary": {
+    "validatorsTracked": 9,
+    "validatorsTotal": 13,
+    "totalClRewardEth": 7.7901,
+    "avgRoiPct": 2.7049,
+    "avgAnnualizedPct": 1.1136
+  },
+  "validators": [
+    {
+      "index": 23109,
+      "pubkey": "0x958950947f7cbdc728e09ba04ea38fafed0cab665ff93b4e177fbb37ef31744c3b8cd25d40d5fe347501636fde7406ca",
+      "status": "active",
+      "daysSinceActivation": 2056.84,
+      "clRewardEth": 0.5903,
+      "roiPct": 1.8447,
+      "annualizedPct": 0.3276,
+      "unavailableReason": null
+    },
+    {
+      "index": 27234,
+      "pubkey": "0xb77c8d32b8354efde754708005d132693ee43d93a71b1dddba4a63681c42aa2bb4b29f6347761c492b70f784c9b8ba85",
+      "status": "active",
+      "daysSinceActivation": 2052.25,
+      "clRewardEth": 0.6875,
+      "roiPct": 2.1484,
+      "annualizedPct": 0.3824,
+      "unavailableReason": null
+    },
+    {
+      "index": 27235,
+      "pubkey": "0x8aab72c29ac42a82a82b5246e1ea6a796507659b5f81cc026dba03794300765356dfffab9fe167141441c468c98f1f38",
+      "status": "active",
+      "daysSinceActivation": 2052.25,
+      "clRewardEth": 0.7357,
+      "roiPct": 2.2991,
+      "annualizedPct": 0.4092,
+      "unavailableReason": null
+    },
+    {
+      "index": 47553,
+      "pubkey": "0x9055d6b87e8b88e9d47c5bafc7eb29f38222dceb741d46a0b2bb38626bc0e30dd05fd5c554d018e44e42d372b160a432",
+      "status": "active",
+      "daysSinceActivation": 2029.68,
+      "clRewardEth": 0.7847,
+      "roiPct": 2.4522,
+      "annualizedPct": 0.4413,
+      "unavailableReason": null
+    },
+    {
+      "index": 73354,
+      "pubkey": "0x929421db53064c729ed6102bef7bf64fc76740f11f9eb21575aae70cd77878b20c69bdb1852ff922b909a24be3b4dc06",
+      "status": "exited",
+      "daysSinceActivation": 2001.01,
+      "clRewardEth": null,
+      "roiPct": null,
+      "annualizedPct": null,
+      "unavailableReason": "status is not 'active' \u2014 balance no longer reflects lifetime reward (exited/slashed validators withdraw to at or near 0 ETH; see script docstring)"
+    },
+    {
+      "index": 81070,
+      "pubkey": "0xa14fbb4bd79bc63145a0647e2ecdb1f7328be89012e139aa0fc5870a3831287302fa53c03703bfe7a46254c590acc426",
+      "status": "exited",
+      "daysSinceActivation": 1992.44,
+      "clRewardEth": null,
+      "roiPct": null,
+      "annualizedPct": null,
+      "unavailableReason": "status is not 'active' \u2014 balance no longer reflects lifetime reward (exited/slashed validators withdraw to at or near 0 ETH; see script docstring)"
+    },
+    {
+      "index": 88498,
+      "pubkey": "0x8d8d931090b195f2705e45310fcdf30d0e6ec8a12dbda8fba6bbc2c5049b4b3649fd296ccd59fcd6fdc31a1d78140ea3",
+      "status": "active",
+      "daysSinceActivation": 1984.18,
+      "clRewardEth": 0.6369,
+      "roiPct": 1.9903,
+      "annualizedPct": 0.3664,
+      "unavailableReason": null
+    },
+    {
+      "index": 89972,
+      "pubkey": "0x93434087d139ff77050c1581e2eb550c8377fcb751fd9e07c907c8bda7e4aad61e9f2bdca19fed256ff643a35cb85cac",
+      "status": "active",
+      "daysSinceActivation": 1982.54,
+      "clRewardEth": 0.7782,
+      "roiPct": 2.4319,
+      "annualizedPct": 0.448,
+      "unavailableReason": null
+    },
+    {
+      "index": 111185,
+      "pubkey": "0xa60c6701d3b3686987a8dcbad2367fd7e0919983f99cddc8c8c3f21f89a12fdb53f69dec876f7bac4833fb19a5238649",
+      "status": "active",
+      "daysSinceActivation": 1948.16,
+      "clRewardEth": 0.7305,
+      "roiPct": 2.2828,
+      "annualizedPct": 0.428,
+      "unavailableReason": null
+    },
+    {
+      "index": 166200,
+      "pubkey": "0x820bbe4c8c19d21f0cf32257ced118aa43badb9c768d7854cc91f79b72f3d5472f47eab1b54477eb72fbb3ff10eeaebf",
+      "status": "active",
+      "daysSinceActivation": 1863.48,
+      "clRewardEth": 0.7206,
+      "roiPct": 2.2519,
+      "annualizedPct": 0.4414,
+      "unavailableReason": null
+    },
+    {
+      "index": 590171,
+      "pubkey": "0x85e97d5a9bf9b934bd83a5b399ebe9e39bbaba6d686119d2f01d1ecf5a038a8932089ba505399d46d0dc62090fd9a101",
+      "status": "exited",
+      "daysSinceActivation": 1183.69,
+      "clRewardEth": null,
+      "roiPct": null,
+      "annualizedPct": null,
+      "unavailableReason": "status is not 'active' \u2014 balance no longer reflects lifetime reward (exited/slashed validators withdraw to at or near 0 ETH; see script docstring)"
+    },
+    {
+      "index": 1131947,
+      "pubkey": "0xa3095f33917c50deb0cd877c34a78f27686abc0db8ac42ca1c51791ab67f550f5fb172854c877a190e0516aba0486700",
+      "status": "exited",
+      "daysSinceActivation": 917.9,
+      "clRewardEth": null,
+      "roiPct": null,
+      "annualizedPct": null,
+      "unavailableReason": "status is not 'active' \u2014 balance no longer reflects lifetime reward (exited/slashed validators withdraw to at or near 0 ETH; see script docstring)"
+    },
+    {
+      "index": 2032648,
+      "pubkey": "0x8007ad5fb5308d01886cf4fed6b7878a423e4f5619889e193f0e2ff0f70d4ba549553cfa76ed6702cb50dd50cb3d8570",
+      "status": "active",
+      "daysSinceActivation": 357.97,
+      "clRewardEth": 2.1257,
+      "roiPct": 6.6428,
+      "annualizedPct": 6.7778,
+      "unavailableReason": null
+    }
+  ],
+  "notes": [
+    "beaconcha.in is NOT used anywhere in this script (its HTML validator page 403s as bot-protected, its JSON API key is zero-quota \u2014 see scripts/fetch_earnings.py's docstring for the confirmed-dead details, same finding applies here). Every figure below is computed from frontend/src/data/fleet.json's already-fetched balanceEth/activationEpoch fields \u2014 no new node or third-party call is made by this script at all.",
+    "clRewardEth = balanceEth - 32.0 (the base stake). This is consensus-layer (CL) reward only \u2014 EL tips (priority fees / MEV) are paid to each validator's fee-recipient wallet, never credited to the validator's own beacon-chain balance, so this figure and earnings.json's confirmedTipsEthInScanWindow are cleanly separate, non-overlapping figures covering very different time windows (whole life since activation here, vs. a recent multi-day scan window there) \u2014 don't sum them without accounting for that.",
+    "roiPct and annualizedPct are a SINCE-ACTIVATION AVERAGE, not a true trailing 7d/31d/365d APR the way the old beaconcha.in-scraped notebooks showed. annualizedPct = (clRewardEth / 32) / daysSinceActivation * 365.25 * 100 \u2014 it extrapolates the validator's whole-life average daily rate out to a year. It will NOT reflect a recent change in performance any faster than that whole-life average allows it to move; a validator active 5+ years will barely budge from a single bad (or great) recent week. A true trailing-window APR needs historical balance snapshots (balance as of 7/31/365 days ago) that this repo does not keep today \u2014 fleet.json is a single point-in-time snapshot, overwritten on every run, with no history retained. Building real trailing windows is future work (MIGRATE.md Stage 7), not approximated here.",
+    "Validators with status != 'active' (exited/slashed) have every figure here set to null, not a fabricated number: an exited validator's balance drops to (or toward) 0 upon withdrawal, so 'balanceEth - 32' at that point measures 'already withdrew', not lifetime reward. Pending validators (activationEpoch not yet reached, sentinel >= 10**15) are also null \u2014 there is no 'since activation' window yet for them.",
+    "GENESIS_TS/SECONDS_PER_EPOCH are the same constants scripts/fetch_fleet.py uses for its own daysOnline field. daysSinceActivation here is computed independently (this script has no code dependency on fetch_fleet.py, matching this repo's existing per-script constant-duplication convention) but should closely track fleet.json's own daysOnline for the same validator \u2014 a large mismatch between the two would indicate a bug in one of the two scripts, not a real difference.",
+    "SAMPLE-DATA CAVEAT (same honesty convention as this repo's wallets.json/price.json): this script has no network dependency and WAS run for real against the committed fleet.json to produce this file \u2014 every number above is genuinely computed arithmetic, not hand-invented. What is NOT independently re-verified in this working session is fleet.json's own freshness: this sandbox cannot reach ethereum-wg, so fleet.json was not re-fetched from the live node before this script ran against it (see sourceFleetGeneratedAt below for exactly which fleet.json snapshot these figures are derived from). Re-run scripts/fetch_fleet.py followed immediately by this script, together, from a machine on ethereum-wg, before trusting these figures for anything beyond development/UI purposes."
+  ]
+}
