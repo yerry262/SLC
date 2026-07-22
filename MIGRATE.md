@@ -71,7 +71,7 @@ finished once written.
 | Old file | What it does | New home / status |
 |---|---|---|
 | `Main_Menu.ipynb` | Button nav bar that `%run`s the selected notebook into an `Output()` widget; ETH price ticker in header; title/version bar | **Being adopted, not superseded** — decided 2026-07-22 to keep the same shape: a persistent top nav with one button per section, same labels as `button_notebooks` (Our Mission, Our Rewards, Our Blocks, Staking Calculator, Investor Calculator, Wallets, Online Status). Difference from the original: real client-side routing (see "Target site structure" below) instead of `%run`-into-an-Output-widget. SLC's current single-page layout (`App.tsx`) becomes the "Dashboard"/home route rather than the whole site. |
-| `Funct.py` | `get_eth_price()` (CoinMarketCap), `get_total_crypto_market_cap()` / `get_BTC_market_cap()` / `get_eth_market_cap()` (CoinGecko/CryptoCompare), ETH↔USD formatters, `style_dataframe()`, loading spinner HTML, `BOTTOM_WARNING` disclaimer | **Partially superseded.** ETH price / USD conversion isn't in SLC yet — none of `fleet.json`/`earnings.json`/`performance.json` carry a USD figure today, everything's ETH-denominated. The market-cap fetchers were flavor for `Validator_Mission.ipynb`'s static content, not core to the dashboard. The disclaimer text (`BOTTOM_WARNING`) is worth carrying over in spirit if this ever shows real financial figures to anyone but yerry. |
+| `Funct.py` | `get_eth_price()` (CoinMarketCap), `get_total_crypto_market_cap()` / `get_BTC_market_cap()` / `get_eth_market_cap()` (CoinGecko/CryptoCompare), ETH↔USD formatters, `style_dataframe()`, loading spinner HTML, `BOTTOM_WARNING` disclaimer | **Fully ported, 2026-07-22.** `scripts/fetch_price.py` covers ETH/USD (CoinGecko default, CoinMarketCap opt-in via env var, never the old hardcoded key) and all three market-cap figures — checked the old source directly and confirmed none of the three market-cap functions ever used an API key, so all three now come from CoinGecko's public endpoints with zero secrets, consolidated off CryptoCompare entirely (one provider, one already-proven-keyless). Threaded into `FleetSummary`/`EarningsPanel` (Stage 6) and `MissionPage` (Stage 5, wired same-day). `BOTTOM_WARNING` ported in spirit via `SiteFooter.tsx`. |
 | `NODE.py` | Infura `provider_url` for Web3 balance reads | **Superseded.** SLC reads the home node directly (`ethereum-wg`, `10.44.0.4`) — see `scripts/fetch_fleet.py`'s `NODE_IP`/`GETH_RPC`/`BEACON_API`. Do not reintroduce Infura as the primary path (see secrets note above). |
 | `Varibles.py` | `validator_ids`, `validator_pubkeys`, `wallet_addresses` (13 "tip jar" + deployer addresses), `wallet_alias` | **Partially ported.** Validator IDs/pubkeys are now discovered dynamically (see `fetch_fleet.py`'s deposit-address-anchored discovery) rather than hardcoded — better, keep that approach. The **tip-jar wallet addresses/aliases are not ported** — see "Tip-jar wallet balances" gap below. |
 | `version.py` | `ver` string shown in footer, `easteregg` flag | Version string: trivial to add to SLC's footer if wanted (not currently shown). `easteregg`/hidden-analytics coupling: don't port (see above). |
@@ -123,37 +123,42 @@ Notes for whoever builds the nav shell (Stage 5):
 
 ## Gaps summary (things with no current home in SLC)
 
-1. **Tip-jar liquid wallet balances** (`Validator_Wallets.ipynb`) — real
-   accumulated tip balance per validator's fee-recipient wallet, plus the
-   "ETH until next validator" countdown. Straightforward: it's a handful of
-   `eth_getBalance` calls against the node's Geth RPC, same pattern
-   `fetch_fleet.py` already uses for other data. → **Stage 6**
+1. **Tip-jar liquid wallet balances** (`Validator_Wallets.ipynb`) — **done,
+   Stage 6, 2026-07-22.** `scripts/fetch_wallets.py` + `WalletsPage.tsx` at
+   `/wallets`. `wallets.json`'s committed content is still hand-written
+   sample data (no `ethereum-wg` access from any session so far) — run the
+   script for real on/near the node to replace it.
 2. **Historical/lifetime block-proposal data** (`Validator_Staking_Blocks.ipynb`)
    — **proposed-block half done, Stage 8, 2026-07-22**: unblocked via a
    header-walk (no Prysm-DB export or beaconcha.in needed for *proposed*
    blocks specifically — see Stage 8's notes). Missed-slot attribution is
    still near-head-only (`fetch_performance.py`), not a full lifetime miss
    count — that part remains genuinely blocked the way this doc originally
-   described.
+   described. `blocks.json` is also still sample data pending real node access.
 3. **APR / ROI% metrics and CL-reward figures** (`Validator_Earnings.ipynb`) —
-   blocked on beaconcha.in Phase 2 (HTML scraping is confirmed dead) or a
-   from-chain computation of consensus-layer rewards analogous to what
-   `fetch_earnings.py` already does for EL tips. → **Stage 7**
-4. **ETH→USD conversion anywhere in the UI** — `Funct.py`'s `get_eth_price()`
-   has no equivalent in SLC yet; every figure today is ETH-only. → **Stage 6**
-5. **Static "About/Mission" content** (`Validator_Mission.ipynb`) — no data
-   gap, just not yet written into the new frontend. Cheapest item on this
-   list. → **Stage 5** (nav shell done 2026-07-22; the actual Mission copy
-   is separate, parallel work, still open — `/mission` shows the shared
-   placeholder for now)
-6. **Charting library decision** — the old dashboard used Plotly + matplotlib
-   (interactive block charts, investor allocation charts, relay pie chart,
-   US visitor map). SLC's `frontend/package.json` has no charting dependency
-   yet. Needed before porting `Validator_Staking_Blocks.ipynb`'s interactive
-   chart or any investor chart (if that scope is ever approved). → **Stage 7**
-7. **Persistent top navigation** — SLC is currently one scrolling page;
-   the old dashboard's button-per-section menu isn't reproduced yet.
-   → **Stage 5 — done 2026-07-22.** `NavBar.tsx` + hash routing, 7 routes.
+   **partially done, Stage 7, 2026-07-22.** `scripts/fetch_rewards.py` +
+   `RewardsPage.tsx` at `/rewards` compute a real (not sample — needs no
+   network, reads committed `fleet.json`) since-activation ROI%/annualized
+   rate directly from chain-derived balance data, explicitly NOT claiming
+   true trailing 7d/31d/365d APR (would need historical balance snapshots
+   this repo doesn't keep). A true trailing-window figure is still blocked
+   on beaconcha.in Phase 2 or a snapshot-history mechanism, same as before.
+4. **ETH→USD conversion anywhere in the UI** — **done, Stage 6 + same-day
+   follow-up, 2026-07-22.** `scripts/fetch_price.py` (CoinGecko default, no
+   key) threaded into `FleetSummary`/`EarningsPanel`/`MissionPage`. This one
+   *is* real fetched data, not a sample — this session had live internet
+   access (confirmed: `ethereum-wg` stayed unreachable throughout, but
+   `api.coingecko.com` wasn't on that mesh and answered fine), so
+   `price.json` was generated by an actual run of the script, not hand-written.
+5. **Static "About/Mission" content** (`Validator_Mission.ipynb`) — **done,
+   Stage 5, 2026-07-22.** `MissionPage.tsx` at `/mission`, including the
+   live ETH-price/market-cap citations (see item 4).
+6. **Charting library decision** — **done, Stage 7, 2026-07-22.** Recharts
+   added; first real chart (attestation participation vs. reward
+   effectiveness) in `PerformancePanel.tsx` on the Dashboard, built from
+   already-fetched `performance.json` — no new fetch script needed.
+7. **Persistent top navigation** — **done, Stage 5, 2026-07-22.**
+   `NavBar.tsx` + hash routing, 7 routes.
 
 ## Migration stages
 
@@ -207,11 +212,20 @@ is still an empty/placeholder state.
 - [x] Port `Validator_Mission.ipynb`'s static copy to `/mission` — pure
       content, no data wiring. **Done 2026-07-22** —
       `frontend/src/pages/MissionPage.tsx`, ported faithfully (mission
-      statement, POAP badges, economic-incentives explainer); the one or two
-      inline live-figure citations (market cap, ETH price) render as an
-      explicit "not wired up yet" placeholder rather than a fabricated
-      number, since that fetch isn't built yet (Stage 6). Mounted at
+      statement, POAP badges, economic-incentives explainer). Mounted at
       `/mission` in `routing/routes.tsx`, replacing its `ComingSoon` stub.
+      The inline live-figure citations (32 ETH's USD equivalent, plus the
+      "Crypto Market Caps" section) initially shipped as placeholders here,
+      then wired for real the same day once `scripts/fetch_price.py`
+      existed (see below) — checked the old repo first and confirmed none
+      of `get_total_crypto_market_cap()`/`get_BTC_market_cap()`/
+      `get_eth_market_cap()` ever used an API key, so this needed no
+      credentials from the old repo, just its two already-public CoinGecko/
+      CryptoCompare endpoints re-implemented (consolidated onto CoinGecko
+      alone here — see `fetch_price.py`'s docstring for why). This session
+      had live internet access (unlike `ethereum-wg`, which stayed
+      unreachable throughout), so `price.json` here is real fetched data,
+      not a sample — the first data file in this migration that isn't.
 - [x] Give `/blocks`, `/staking-calculator`, `/investor-calculator`, and
       `/wallets` a consistent honest empty state (see "Empty-state
       convention" above) rather than leaving them blank or building
