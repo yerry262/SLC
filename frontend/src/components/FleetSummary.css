@@ -45,3 +45,45 @@
   color: var(--text-dim);
   font-weight: 500;
 }
+
+.fleet-summary__breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  background: color-mix(in srgb, var(--panel) 90%, var(--cyan) 4%);
+  border-left: 2px solid var(--cyan);
+  border-radius: 0 4px 4px 0;
+}
+
+.fleet-summary__breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.fleet-summary__breakdown-label {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fleet-summary__breakdown-window {
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.fleet-summary__breakdown-value {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.fleet-summary__breakdown-value--cyan {
+  color: var(--cyan);
+}
