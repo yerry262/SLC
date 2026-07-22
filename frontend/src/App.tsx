@@ -5,11 +5,13 @@ import { PerformancePanel } from './components/PerformancePanel'
 import { EarningsPanel } from './components/EarningsPanel'
 import fleetData from './data/fleet.json'
 import earningsData from './data/earnings.json'
-import type { FleetSnapshot, EarningsSnapshot } from './types'
+import priceData from './data/price.json'
+import type { FleetSnapshot, EarningsSnapshot, PriceSnapshot } from './types'
 import './App.css'
 
 const fleet = fleetData as FleetSnapshot
 const earnings = earningsData as EarningsSnapshot
+const price = priceData as PriceSnapshot
 
 // Proposal/attestation-per-slot history isn't tracked yet (see
 // PerformancePanel's own notes) — render a neutral, unlit strip rather
@@ -31,7 +33,7 @@ function App() {
       <SlotStrip epoch={fleet.currentEpoch} slots={neutralSlots} />
 
       <div className="app__body">
-        <FleetSummary validators={fleet.validators} earnings={earnings} />
+        <FleetSummary validators={fleet.validators} earnings={earnings} price={price} />
         <ValidatorTable validators={fleet.validators} />
       </div>
 

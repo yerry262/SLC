@@ -52,3 +52,9 @@ export interface EarningsSnapshot {
   validators: EarningsValidator[]
   notes: string[]
 }
+
+export interface PriceSnapshot {
+  generatedAt: string
+  source: string
+  ethUsd: number
+}
