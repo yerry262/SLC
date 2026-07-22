@@ -1,0 +1,269 @@
+.mission-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mission-page__hero {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.mission-page__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+  border: 1px solid var(--hairline);
+  padding: 3px 8px;
+}
+
+.mission-page__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+}
+
+.mission-page__section {
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+}
+
+.mission-page__section-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.mission-page__section-header h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.mission-page__section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+}
+
+.mission-page__section-body p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.mission-page__incentive h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.mission-page__placeholder {
+  display: inline-block;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--text-dim);
+  border: 1px dashed var(--hairline);
+  border-radius: 3px;
+  padding: 0 6px;
+  cursor: help;
+}
+
+/* Our Recognition: POAP badges */
+
+.mission-page__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  padding: 8px 0 4px;
+}
+
+.mission-page__badge {
+  margin: 0;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.mission-page__badge img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 1px solid var(--hairline);
+  background: var(--panel-raised);
+  object-fit: cover;
+}
+
+.mission-page__badge figcaption {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-dim);
+}
+
+.mission-page__badge-details {
+  margin: 8px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mission-page__badge-details dt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  color: var(--text);
+}
+
+.mission-page__badge-details dd {
+  margin: 2px 0 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+.mission-page__badge-details dd:last-child {
+  margin-bottom: 0;
+}
+
+/* Crypto Market Caps */
+
+.mission-page__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.mission-page__stat {
+  margin: 0;
+  min-width: 160px;
+  flex: 1 1 160px;
+}
+
+.mission-page__stat dt {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mission-page__stat dd {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.mission-page__stat--unavailable {
+  color: var(--text-dim);
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: help;
+}
+
+.mission-page__stat-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+/* Shared notice / disclaimer boxes */
+
+.mission-page__notice {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: var(--panel-raised);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--coral);
+}
+
+.mission-page__notice-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--coral);
+}
+
+.mission-page__notice p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.mission-page__disclaimer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--amber);
+}
+
+.mission-page__disclaimer-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.mission-page__disclaimer p {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+
+@media (max-width: 720px) {
+  .mission-page__stats {
+    gap: 16px;
+  }
+
+  .mission-page__badges {
+    gap: 18px;
+  }
+
+  .mission-page__badge {
+    width: 120px;
+  }
+
+  .mission-page__badge img {
+    width: 90px;
+    height: 90px;
+  }
+}

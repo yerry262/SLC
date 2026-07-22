@@ -1,42 +1,18 @@
-import { SlotStrip } from './components/SlotStrip'
-import { FleetSummary } from './components/FleetSummary'
-import { ValidatorTable } from './components/ValidatorTable'
-import { PerformancePanel } from './components/PerformancePanel'
-import { EarningsPanel } from './components/EarningsPanel'
-import fleetData from './data/fleet.json'
-import earningsData from './data/earnings.json'
-import type { FleetSnapshot, EarningsSnapshot } from './types'
+import { NavBar } from './components/NavBar'
+import { useHashRoute } from './routing/useHashRoute'
+import { routes, defaultRoute } from './routing/routes'
 import './App.css'
 
-const fleet = fleetData as FleetSnapshot
-const earnings = earningsData as EarningsSnapshot
-
-// Proposal/attestation-per-slot history isn't tracked yet (see
-// PerformancePanel's own notes) — render a neutral, unlit strip rather
-// than fabricating tick data. The epoch number itself is real.
-const neutralSlots = Array.from({ length: 32 }, (_, slot) => ({
-  slot,
-  proposedByUs: false,
-  missed: false,
-}))
-
 function App() {
+  const path = useHashRoute()
+  // Unknown/stale hash (e.g. an old bookmark) falls back to Dashboard
+  // rather than a 404 — there's no server involved to 404 against anyway.
+  const route = routes.find((r) => r.path === path) ?? defaultRoute
+
   return (
-    <div className="app">
-      <header className="app__header">
-        <span className="app__eyebrow">SLC</span>
-        <h1 className="app__title">Validator Watch</h1>
-      </header>
-
-      <SlotStrip epoch={fleet.currentEpoch} slots={neutralSlots} />
-
-      <div className="app__body">
-        <FleetSummary validators={fleet.validators} earnings={earnings} />
-        <ValidatorTable validators={fleet.validators} />
-      </div>
-
-      <PerformancePanel />
-      <EarningsPanel />
+    <div className="app-shell">
+      <NavBar routes={routes} currentPath={route.path} />
+      <main className="app-shell__main">{route.element}</main>
     </div>
   )
 }
