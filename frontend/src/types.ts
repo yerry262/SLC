@@ -71,6 +71,10 @@ export interface PriceSnapshot {
   generatedAt: string
   source: string
   ethUsd: number
+  marketCapsSource: string
+  totalCryptoMarketCapUsd: number | null
+  btcMarketCapUsd: number | null
+  ethMarketCapUsd: number | null
 }
 
 export interface BlockProposal {

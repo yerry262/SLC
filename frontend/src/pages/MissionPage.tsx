@@ -1,25 +1,32 @@
 import { Fragment } from 'react'
+import priceData from '../data/price.json'
+import type { PriceSnapshot } from '../types'
 import './MissionPage.css'
 
 // Ported from SLC-DASHBOARD-2024/SLC/Validator_Mission.ipynb ("Our Mission",
 // "Our Recognition", "Economic Incentives" and the surrounding About-us
 // copy). The old notebook cited a handful of live figures inline (32 ETH's
-// USD equivalent via CoinMarketCap, plus a "Crypto Market Caps" section from
-// CoinGecko/CryptoCompare). None of that is wired up here on purpose — see
-// MIGRATE.md's secrets warning (no hardcoded API keys) and Stage 6 (ETH→USD
-// / wallet fetch is separate follow-up work). Every place the old notebook
-// showed a live number, this page shows a clearly labeled placeholder
-// instead of a fabricated figure.
+// USD equivalent, plus a "Crypto Market Caps" section). Both are now wired
+// to price.json (see scripts/fetch_price.py): the old CoinMarketCap key
+// hazard was dropped in favor of CoinGecko's public /simple/price + /global
+// endpoints, which checked out as keyless in the old repo too — none of
+// get_total_crypto_market_cap()/get_BTC_market_cap()/get_eth_market_cap()
+// ever used an API key, so there was nothing to carry over, just endpoints
+// to re-implement.
 
-const LIVE_FIGURE_TITLE =
-  'Live figure, not wired up yet — ETH price / market-cap fetching is separate follow-up work (see MIGRATE.md, Stage 6).'
+const price = priceData as PriceSnapshot
 
-function LiveFigurePlaceholder({ children }: { children: string }) {
-  return (
-    <span className="mission-page__placeholder" title={LIVE_FIGURE_TITLE}>
-      {children}
-    </span>
-  )
+function formatUsd(usd: number) {
+  return usd.toLocaleString(undefined, { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })
+}
+
+function formatUsdCompact(usd: number) {
+  return usd.toLocaleString(undefined, {
+    style: 'currency',
+    currency: 'USD',
+    notation: 'compact',
+    maximumFractionDigits: 2,
+  })
 }
 
 interface PoapBadge {
@@ -57,13 +64,14 @@ const poapBadges: PoapBadge[] = [
 
 interface MarketCapStat {
   label: string
+  valueUsd: number | null
   sourceNote: string
 }
 
 const marketCapStats: MarketCapStat[] = [
-  { label: 'total crypto market cap', sourceNote: 'source: CoinGecko /global' },
-  { label: "bitcoin's market cap", sourceNote: 'source: CryptoCompare pricemultifull' },
-  { label: "ethereum's market cap", sourceNote: 'source: CryptoCompare pricemultifull' },
+  { label: 'total crypto market cap', valueUsd: price.totalCryptoMarketCapUsd, sourceNote: 'source: CoinGecko /global' },
+  { label: "bitcoin's market cap", valueUsd: price.btcMarketCapUsd, sourceNote: 'source: CoinGecko /simple/price' },
+  { label: "ethereum's market cap", valueUsd: price.ethMarketCapUsd, sourceNote: 'source: CoinGecko /simple/price' },
 ]
 
 export function MissionPage() {
@@ -81,8 +89,7 @@ export function MissionPage() {
             Ethereum staking. We understand that the intricacies of blockchain can be daunting for the average
             individual. That&apos;s why we specialize in creating, managing, and running Ethereum validators that
             are accessible to everyone. We recognize that setting up a validator on the Ethereum network requires
-            a substantial commitment &ndash; specifically, a stake of 32 ETH (~
-            <LiveFigurePlaceholder>figure not yet wired up</LiveFigurePlaceholder>). This threshold can be a
+            a substantial commitment &ndash; specifically, a stake of 32 ETH (~{formatUsd(32 * price.ethUsd)}). This threshold can be a
             significant barrier for many. To address this, we offer a unique pooling solution, allowing
             individuals to participate in staking without needing the full 32 ETH.
           </p>
@@ -244,20 +251,23 @@ export function MissionPage() {
             {marketCapStats.map((stat) => (
               <dl className="mission-page__stat" key={stat.label}>
                 <dt>{stat.label}</dt>
-                <dd className="mission-page__stat--unavailable" title={LIVE_FIGURE_TITLE}>
-                  not wired up
+                <dd className={stat.valueUsd === null ? 'mission-page__stat--unavailable' : undefined}>
+                  {stat.valueUsd === null ? 'unavailable' : formatUsdCompact(stat.valueUsd)}
                 </dd>
                 <span className="mission-page__stat-sub">{stat.sourceNote}</span>
               </dl>
             ))}
           </div>
           <div className="mission-page__notice">
-            <span className="mission-page__notice-label">live figures not wired up</span>
+            <span className="mission-page__notice-label">live figures, refreshed at build time</span>
             <p>
-              The original notebook pulled these three figures live from CoinGecko and CryptoCompare on every
-              page load. That fetch isn&apos;t wired up here &mdash; this page renders static, ported content
-              only. Wiring a live ETH/USD and market-cap fetch (with a public, no-key-required default per this
-              repo&apos;s fetch-script conventions) is separate follow-up work.
+              The original notebook pulled these figures live from CoinGecko and CryptoCompare on every page
+              load. This static site can&apos;t do that (no runtime API calls, see this repo&apos;s
+              architecture) &mdash; instead they&apos;re fetched by <code>scripts/fetch_price.py</code> and
+              baked into the build, same as every other figure on this site. All three now come from
+              CoinGecko&apos;s public endpoints (<code>/simple/price</code>, <code>/global</code>) with no API
+              key required &mdash; the old CryptoCompare calls needed none either, so nothing carried forward
+              from the old repo, just re-implemented endpoints. Re-run the fetch script to refresh.
             </p>
           </div>
         </div>
