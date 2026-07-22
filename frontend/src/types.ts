@@ -57,6 +57,7 @@ export interface Wallet {
   address: string
   alias: string
   balanceEth: number | null
+  validatorIndices: number[]
 }
 
 export interface WalletsSnapshot {

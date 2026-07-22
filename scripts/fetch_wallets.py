@@ -24,6 +24,18 @@ validator" countdown. It's a pure function of the total balance vs. the
 storing it as a snapshot field would let it go stale relative to the
 balance it was derived from.
 
+validatorIndices: Varibles.py's wallet_alias labels ("Validator 1 Tip Jar",
+etc.) are generic 2024-era ordinals with no link to which validator (by
+index) actually owns each wallet — worse, they predate our newest
+validator (2032648), which turns out to share wallet #4's address with
+validator 47553 (both use the same default fee_recipient) with no trace of
+that in the old labels. Rather than guess or hardcode a mapping, this
+script cross-references each wallet address against
+frontend/src/data/earnings.json's already-fetched feeRecipient field (live
+per-validator config, read over ethereum-wg by fetch_earnings.py) and
+records every validator index whose fee_recipient matches — empty for
+wallets that aren't a fee-recipient at all (Weekly Base Pay, Deployer).
+
 Run: python3 scripts/fetch_wallets.py
 Env:
   NODE_IP   home node's WireGuard address (default 10.44.0.4, same node
@@ -40,6 +52,7 @@ from datetime import datetime, timezone
 
 NODE_IP = os.environ.get("NODE_IP", "10.44.0.4")
 GETH_RPC = f"http://{NODE_IP}:8545"
+EARNINGS_PATH = os.path.join(os.path.dirname(__file__), "..", "frontend", "src", "data", "earnings.json")
 
 # 13 validator "tip jar" wallets + the deployer address. Public on-chain
 # addresses, not secrets — safe to commit as plain constants (see this
@@ -98,7 +111,29 @@ def get_balance_eth(address):
     return int(balance_wei_hex, 16) / 1e18
 
 
+def load_validator_indices_by_address():
+    """address (lowercased) -> sorted list of validator indices whose
+    feeRecipient matches, from the already-fetched earnings.json. Empty
+    dict (never guessed) if that file is missing/unparsable — this cross-
+    reference is a display enrichment, not required for balances to work."""
+    try:
+        with open(EARNINGS_PATH) as f:
+            earnings = json.load(f)
+    except Exception as e:
+        print(f"  WARNING: couldn't read {EARNINGS_PATH} for validator cross-reference ({e}); "
+              f"wallets will have empty validatorIndices", file=sys.stderr)
+        return {}
+    by_address = {}
+    for v in earnings.get("validators", []):
+        fee_recipient = v.get("feeRecipient")
+        if fee_recipient:
+            by_address.setdefault(fee_recipient.lower(), []).append(v["index"])
+    return {addr: sorted(indices) for addr, indices in by_address.items()}
+
+
 def main():
+    validator_indices_by_address = load_validator_indices_by_address()
+
     wallets = []
     failures = []
     for entry in WALLET_ADDRESSES:
@@ -113,6 +148,7 @@ def main():
             "address": address,
             "alias": entry["alias"],
             "balanceEth": round(balance_eth, 6) if balance_eth is not None else None,
+            "validatorIndices": validator_indices_by_address.get(address.lower(), []),
         })
 
     notes = [
@@ -124,6 +160,12 @@ def main():
         "The 'ETH until next validator' countdown is intentionally not included here — it's a pure "
         "function of the total balance below and is computed client-side (see WalletsPage.tsx) so it "
         "can't go stale relative to the balance snapshot it's derived from.",
+        "validatorIndices is a live cross-reference against earnings.json's feeRecipient field (not "
+        "from Varibles.py's 2024-era ordinal labels, which have no such link and predate our newest "
+        "validator). Some wallets legitimately map to more than one index — e.g. any validator using "
+        "the default_config fallback fee_recipient shares that wallet with every other validator on "
+        "the same fallback. An empty list means the wallet isn't a fee_recipient at all (Weekly Base "
+        "Pay, Deployer).",
     ]
     if failures:
         notes.append(f"eth_getBalance failed for {len(failures)} address(es), left as null (never guessed): "
