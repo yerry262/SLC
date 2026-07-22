@@ -46,6 +46,17 @@ no key/secret is ever shipped to the client bundle.
 - **Backend**: none — static site; data is pre-fetched at CI build/deploy time
 - **Deployment**: GitHub Pages via GitHub Actions
 
+## Local Development
+
+- Frontend dev server is pinned to **port 5173** (`vite.config.ts`'s
+  `server.port` + `strictPort: true`); `npm run preview` is pinned to
+  **4173** the same way. `strictPort` makes Vite fail instead of silently
+  incrementing to 5174/5175/etc. when the port's already taken.
+- Before starting either, kill whatever's already bound to that port so the
+  same port gets reused every time rather than accumulating stale
+  processes: `fuser -k 5173/tcp` (or `lsof -ti:5173 | xargs -r kill -9`),
+  then `npm run dev`. Same pattern on 4173 for `npm run preview`.
+
 ## Deployment Status
 
 - **Live**: https://yerry262.github.io/SLC
