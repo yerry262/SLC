@@ -50,7 +50,26 @@ import urllib.request
 import urllib.error
 from datetime import datetime, timezone
 
-NODE_IP = "10.44.0.4"
+
+def _load_dotenv():
+    """Tiny .env loader (no new dependency) — see repo root .env.example.
+    Populates os.environ from .env if present; real exported env vars still
+    win (setdefault, not overwrite)."""
+    env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    if not os.path.exists(env_path):
+        return
+    with open(env_path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            os.environ.setdefault(key.strip(), value.strip())
+
+
+_load_dotenv()
+
+NODE_IP = os.environ.get("NODE_IP", "10.44.0.4")
 BEACON_API = f"http://{NODE_IP}:3500"
 VALIDATOR_METRICS = f"http://{NODE_IP}:8081/metrics"
 SECONDS_PER_EPOCH = 384

@@ -54,6 +54,25 @@ import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
+
+def _load_dotenv():
+    """Tiny .env loader (no new dependency) — see repo root .env.example.
+    Populates os.environ from .env if present; real exported env vars still
+    win (setdefault, not overwrite)."""
+    env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+    if not os.path.exists(env_path):
+        return
+    with open(env_path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            os.environ.setdefault(key.strip(), value.strip())
+
+
+_load_dotenv()
+
 NODE_IP = os.environ.get("NODE_IP", "10.44.0.4")
 GETH_RPC = f"http://{NODE_IP}:8545"
 BEACON_API = f"http://{NODE_IP}:3500"
@@ -89,7 +108,10 @@ def get_json(url, timeout=15):
 
 def rpc(method, params=None, timeout=30):
     payload = json.dumps({"jsonrpc": "2.0", "method": method, "params": params or [], "id": 1}).encode()
-    req = urllib.request.Request(GETH_RPC, data=payload, headers={"Content-Type": "application/json"})
+    # Geth's --http.vhosts allowlist rejects requests whose Host header isn't
+    # on the list — fetch_fleet.py/fetch_wallets.py already set this; this
+    # script's own first real run against the node caught that it hadn't.
+    req = urllib.request.Request(GETH_RPC, data=payload, headers={"Content-Type": "application/json", "Host": "localhost"})
     result = json.loads(_fetch_bytes(req, timeout=timeout))
     if "error" in result:
         raise RuntimeError(f"{method} RPC error: {result['error']}")
