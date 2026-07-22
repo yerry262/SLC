@@ -70,7 +70,7 @@ finished once written.
 
 | Old file | What it does | New home / status |
 |---|---|---|
-| `Main_Menu.ipynb` | Button nav bar that `%run`s the selected notebook into an `Output()` widget; ETH price ticker in header; title/version bar | **Superseded by React routing/layout.** SLC currently renders all panels on one page (`App.tsx`) rather than a click-to-load menu — revisit if the panel count grows enough to need real navigation/tabs. |
+| `Main_Menu.ipynb` | Button nav bar that `%run`s the selected notebook into an `Output()` widget; ETH price ticker in header; title/version bar | **Being adopted, not superseded** — decided 2026-07-22 to keep the same shape: a persistent top nav with one button per section, same labels as `button_notebooks` (Our Mission, Our Rewards, Our Blocks, Staking Calculator, Investor Calculator, Wallets, Online Status). Difference from the original: real client-side routing (see "Target site structure" below) instead of `%run`-into-an-Output-widget. SLC's current single-page layout (`App.tsx`) becomes the "Dashboard"/home route rather than the whole site. |
 | `Funct.py` | `get_eth_price()` (CoinMarketCap), `get_total_crypto_market_cap()` / `get_BTC_market_cap()` / `get_eth_market_cap()` (CoinGecko/CryptoCompare), ETH↔USD formatters, `style_dataframe()`, loading spinner HTML, `BOTTOM_WARNING` disclaimer | **Partially superseded.** ETH price / USD conversion isn't in SLC yet — none of `fleet.json`/`earnings.json`/`performance.json` carry a USD figure today, everything's ETH-denominated. The market-cap fetchers were flavor for `Validator_Mission.ipynb`'s static content, not core to the dashboard. The disclaimer text (`BOTTOM_WARNING`) is worth carrying over in spirit if this ever shows real financial figures to anyone but yerry. |
 | `NODE.py` | Infura `provider_url` for Web3 balance reads | **Superseded.** SLC reads the home node directly (`ethereum-wg`, `10.44.0.4`) — see `scripts/fetch_fleet.py`'s `NODE_IP`/`GETH_RPC`/`BEACON_API`. Do not reintroduce Infura as the primary path (see secrets note above). |
 | `Varibles.py` | `validator_ids`, `validator_pubkeys`, `wallet_addresses` (13 "tip jar" + deployer addresses), `wallet_alias` | **Partially ported.** Validator IDs/pubkeys are now discovered dynamically (see `fetch_fleet.py`'s deposit-address-anchored discovery) rather than hardcoded — better, keep that approach. The **tip-jar wallet addresses/aliases are not ported** — see "Tip-jar wallet balances" gap below. |
@@ -83,58 +83,193 @@ finished once written.
 | `Validator_Staking_Blocks.ipynb` | Beaconcha.in `/execution/{id}/produced` API: every block a validator has ever proposed, with block/MEV reward, relay tag, gas used; interactive Plotly bar chart (dropdown metric + slider for # blocks shown), relay-frequency pie chart | **Not ported — real gap.** This is full historical block-proposal data; SLC's `earnings.json`/`performance.json` only cover a recent scan window (days, not the validators' full history) per their own `notes`. Porting this needs either (a) beaconcha.in Phase 2, or (b) exporting Prysm's slashing-protection BoltDB on the node (`earnings.json`'s notes already identify this exact export path and why it hasn't been done yet — requires briefly stopping the live validator service). |
 | `Validator_Wallets.ipynb` | Two distinct balance sources: (1) "Validator Information (illiquid)" — bulk beaconcha.in validator balances, superseded by `fleet.json`; (2) **"Wallet Information (Liquid)"** — direct `eth_getBalance` Web3 calls against each of the 13 hardcoded tip-jar wallet addresses + the deployer address, summed into a running total, plus a "how much ETH until the next 32-ETH validator can be deployed" countdown | **Liquid tip-jar wallet tracking is not ported — real gap, and conceptually distinct from `earnings.json`'s tips.** `earnings.json` currently measures EL tips by summing `(effectiveGasPrice - baseFeePerGas) * gasUsed` over a recent block-receipt scan window — an estimate of *recent* tip revenue. The old notebook instead reads the **actual accumulated balance** sitting in each validator's dedicated fee-recipient/tip-jar wallet, which is a simpler and more directly verifiable "how much have we actually collected" number, plus it's what funds the next validator deployment. Recommend porting this as its own data point (e.g. a new `wallets.json` + fetch script) rather than conflating it with `earnings.json`'s scan-window estimate. |
 
+## Target site structure: top navigation
+
+Decided 2026-07-22: keep the old dashboard's shape — a persistent top nav bar,
+one button per section — rather than growing today's single scrolling page
+indefinitely. Same section labels as `Main_Menu.ipynb`'s `button_notebooks`
+dict, so anyone who used the old dashboard recognizes the new one immediately.
+
+| Nav button | Old notebook | New route (proposed) | Content status |
+|---|---|---|---|
+| **Dashboard** (new — no old equivalent by this name) | *(was the implicit default: whatever the last-clicked button loaded, or nothing)* | `/` | **Exists today.** Today's `App.tsx` (SlotStrip + FleetSummary + ValidatorTable + PerformancePanel + EarningsPanel) becomes this route as-is. |
+| **Our Mission** | `Validator_Mission.ipynb` | `/mission` | Gap — static content, no data dependency. Stage 5. |
+| **Our Rewards** | `Validator_Earnings.ipynb` | `/rewards` | Partially covered today by `EarningsPanel`, which currently lives on `/`. Decide in Stage 5 whether it stays on the dashboard, moves here, or (most likely) appears in both — a summary tile on `/` linking to a fuller `/rewards` page once APR/ROI/CL-reward metrics (gap, Stage 7) exist. |
+| **Our Blocks** | `Validator_Staking_Blocks.ipynb` | `/blocks` | Gap — no historical block-proposal data yet. Page shell can exist before the data does (empty state: "full block history coming once X is available"). Data itself is Stage 8. |
+| **Staking Calculator** | `Validator_Staking_Calc.ipynb` | `/staking-calculator` | Note: despite the name, the old notebook is **not** an interactive "enter an amount, see projected rewards" calculator — it's `Validator_Earnings.ipynb`'s same beaconcha.in scrape with a per-validator checkbox filter and summed totals. Don't build an actual projection calculator here unless that's explicitly wanted; port what it actually does (a filterable rewards view), same data dependencies as "Our Rewards" above. |
+| **Investor Calculator** | `Investor_Staking_Calc.ipynb` | `/investor-calculator` | **Nav entry + empty page shell only, in the same stage as the rest of the nav (Stage 5).** The underlying data (real per-investor dollar amounts, wallet-to-person mapping) is still gated on the explicit go/no-go this doc already flagged above — building the button and an empty/placeholder page costs nothing and doesn't answer that question either way. Do not wire real investor figures into this route until that decision is made. |
+| **Wallets** | `Validator_Wallets.ipynb` | `/wallets` | Illiquid (validator) balances already covered by `FleetSummary`/`fleet.json` on `/`. Liquid tip-jar balances are a real gap (Stage 6) — this route is where they land once fetched. |
+| **Online Status** | `Validator_online.ipynb` | *(dropped — folded into Dashboard)* | `fleet.json`'s `status` + `PerformancePanel`'s per-validator dot already show this on `/`. Not worth a dedicated route; if wanted back as its own page later it's a near-zero-cost split of existing data. |
+
+Notes for whoever builds the nav shell (Stage 5):
+
+- **Routing mechanism:** GitHub Pages serves static files with no server-side
+  rewrites, so a path-based router (`/rewards` as a real path) needs the
+  SPA-fallback trick (a `404.html` that redirects to `index.html`, which
+  `yerry262.github.io`-style Pages sites here already use in some form —
+  check other repos in the workspace before reinventing it). Hash routing
+  (`/#/rewards`) sidesteps that entirely at the cost of slightly uglier URLs.
+  Pick one deliberately in Stage 5 rather than defaulting silently.
+- **Component:** a small `NavBar.tsx` at the top of the layout, styled
+  consistent with the existing dark/cyan design system (`FleetSummary`,
+  `EarningsPanel`, `PerformancePanel` already establish the look — uppercase
+  small-caps section labels, `--cyan` accents, `--panel`/`--hairline`
+  variables). No need for a routing library's default styling to leak in.
+- **Empty-state convention:** several routes above (`/blocks`,
+  `/investor-calculator`) will exist before their data does. Give them a
+  consistent "not wired up yet, here's why" empty state rather than a blank
+  page or a 404 — same spirit as `EarningsPanel`'s existing "tip tracking not
+  yet complete" notice.
+
 ## Gaps summary (things with no current home in SLC)
 
 1. **Tip-jar liquid wallet balances** (`Validator_Wallets.ipynb`) — real
    accumulated tip balance per validator's fee-recipient wallet, plus the
    "ETH until next validator" countdown. Straightforward: it's a handful of
    `eth_getBalance` calls against the node's Geth RPC, same pattern
-   `fetch_fleet.py` already uses for other data.
+   `fetch_fleet.py` already uses for other data. → **Stage 6**
 2. **Historical/lifetime block-proposal data** (`Validator_Staking_Blocks.ipynb`)
    — blocked on the same Prysm slashing-protection DB export (or beaconcha.in
    Phase 2) already called out in `earnings.json`'s own notes. Not a new
-   blocker, just not yet actioned.
+   blocker, just not yet actioned. → **Stage 8**
 3. **APR / ROI% metrics and CL-reward figures** (`Validator_Earnings.ipynb`) —
    blocked on beaconcha.in Phase 2 (HTML scraping is confirmed dead) or a
    from-chain computation of consensus-layer rewards analogous to what
-   `fetch_earnings.py` already does for EL tips.
+   `fetch_earnings.py` already does for EL tips. → **Stage 7**
 4. **ETH→USD conversion anywhere in the UI** — `Funct.py`'s `get_eth_price()`
-   has no equivalent in SLC yet; every figure today is ETH-only.
+   has no equivalent in SLC yet; every figure today is ETH-only. → **Stage 6**
 5. **Static "About/Mission" content** (`Validator_Mission.ipynb`) — no data
-   gap, just not yet written into the new frontend. Cheapest item on this list.
+   gap, just not yet written into the new frontend. Cheapest item on this
+   list. → **Stage 5**
 6. **Charting library decision** — the old dashboard used Plotly + matplotlib
    (interactive block charts, investor allocation charts, relay pie chart,
    US visitor map). SLC's `frontend/package.json` has no charting dependency
    yet. Needed before porting `Validator_Staking_Blocks.ipynb`'s interactive
-   chart or any investor chart (if that scope is ever approved).
+   chart or any investor chart (if that scope is ever approved). → **Stage 7**
+7. **Persistent top navigation** — SLC is currently one scrolling page;
+   the old dashboard's button-per-section menu isn't reproduced yet. → **Stage 5**
 
-## Suggested migration order
+## Migration stages
 
-Roughly cheapest/lowest-risk → most involved, and independent of each other
-(no item below blocks another):
+### Reconciling stage numbers with what's already in the codebase
 
-1. **About/Mission static content** — no data dependency, pure copy + layout.
-2. **Tip-jar liquid wallet balances** — new `scripts/fetch_wallets.py` +
-   `frontend/src/data/wallets.json` + a small panel, following the exact
-   pattern of `fetch_fleet.py`/`fetch_earnings.py` (env-var secrets, retry
-   wrapper, node-direct reads over `ethereum-wg`). Include the "ETH until
-   next validator" countdown as a derived value, not a stored one.
-3. **ETH→USD conversion** — add a price fetch (CoinGecko's public API is a
-   reasonable no-key default; CoinMarketCap needs its own fresh key via env
-   var if preferred) and thread `eth_price` through the existing panels as an
-   optional secondary figure, matching `Funct.py`'s `eth_to_usd`/`format_with_commas`
-   intent without copying its hardcoded key.
-4. **Charting library pick** — small spike/decision needed (e.g. Recharts,
-   visx, or lightweight Plotly.js) before item 5 or 6 can proceed.
-5. **APR/ROI/CL-reward metrics** — depends on beaconcha.in Phase 2 (this
-   repo's `CLAUDE.md` already tracks that as an open item) or a chain-native
-   CL-reward computation.
-6. **Historical block-proposal data** — depends on the Prysm DB export
-   decision (stopping the live validator briefly) or beaconcha.in Phase 2.
-7. **Investor-pool accounting** — explicitly deferred; needs its own
-   go/no-go conversation given the sensitivity of real per-person financial
-   data and this repo's public-reachability caveat, before any design work
-   starts.
+"Stage 1" and "Stage 4" are already load-bearing terms elsewhere in this
+repo, so the stages below continue that numbering rather than restart at 1
+and collide with it:
+
+- **Stage 1** — the Vite/React/TS scaffold with mock data. Done (PR #2).
+- **Stages 2–3** — real fleet/earnings/performance data + panels wired in
+  (`FleetSummary`, `EarningsPanel`, `PerformancePanel`, the rewards/tips
+  breakdown). Done (PR #3), informally — not numbered at the time, named
+  here for continuity.
+- **Stage 4** — already reserved by two existing code comments
+  (`App.tsx`'s `neutralSlots`, `fetch_earnings.py`'s "Stage-4 research") for
+  replacing the `SlotStrip`'s neutral placeholder with real per-slot
+  proposal/attestation history. Not started. Not part of this migration's
+  scope directly, but **Stage 8 below (historical block-proposal data)
+  likely satisfies Stage 4 as a side effect** — same underlying data
+  (Prysm slashing-protection export or beaconcha.in Phase 2), so do them
+  together if both are ever picked up.
+- **Stages 5+** — this migration's work, below. Each stage is meant to be
+  one PR (or a small handful), following this repo's usual
+  branch → PR → merge flow.
+
+### Stage 5 — Nav shell + static content
+
+**Goal:** the site looks and navigates like the old dashboard again, with
+every button from `Main_Menu.ipynb` present, even where the page behind it
+is still an empty/placeholder state.
+
+- [ ] Pick a routing approach (hash routing vs. path routing + `404.html`
+      SPA fallback) — see "Target site structure" above.
+- [ ] Build `NavBar.tsx`, wire up all 6 routes (`/`, `/mission`, `/rewards`,
+      `/blocks`, `/staking-calculator`, `/investor-calculator`, `/wallets`),
+      matching the existing dark/cyan design system.
+- [ ] Port `Validator_Mission.ipynb`'s static copy to `/mission` — pure
+      content, no data wiring. (Optional: thread through an ETH price for
+      the one or two figures that cite it — fine to stub as a placeholder
+      until Stage 6's price fetch lands, don't block on it.)
+- [ ] Give `/blocks`, `/staking-calculator`, `/investor-calculator`, and
+      `/wallets` a consistent honest empty state (see "Empty-state
+      convention" above) rather than leaving them blank or building
+      placeholder data.
+- [ ] Confirm `/investor-calculator` renders its empty state only — no real
+      investor dollar figures, no data file — per the deferral above.
+
+### Stage 6 — Liquid wallet balances + ETH→USD
+
+**Goal:** close the two gaps that are pure "read more from the node we
+already talk to" work, no external API decisions needed.
+
+- [ ] `scripts/fetch_wallets.py`: `eth_getBalance` against the 13 tip-jar
+      wallet addresses + deployer address (see `Varibles.py`'s
+      `wallet_addresses`/`wallet_alias` for the old hardcoded list — verify
+      each address is still live/current before reusing it, this data is
+      2024-era), following `fetch_fleet.py`'s conventions (env-var secrets,
+      retry wrapper, node-direct over `ethereum-wg`).
+      → `frontend/src/data/wallets.json` + `Wallets` type in `types.ts`.
+- [ ] "ETH until next validator" countdown: compute client-side from
+      `wallets.json`'s total, not stored as a snapshot field (it's a pure
+      function of the balance and the 32 ETH threshold, storing it risks it
+      going stale relative to the balance it was computed from).
+- [ ] Wire `/wallets` to real data.
+- [ ] ETH→USD: add a price fetch to one of the existing `scripts/fetch_*.py`
+      scripts (CoinGecko's public endpoint is a reasonable no-key default;
+      if CoinMarketCap is preferred, it needs a **fresh** key via
+      `os.environ`, never hardcoded — see the secrets warning above).
+      Thread `ethPrice` through as an optional secondary figure on existing
+      panels (`FleetSummary`, `EarningsPanel`) rather than a new page.
+
+### Stage 7 — Charting library + rewards depth
+
+**Goal:** pick how this site does charts (nothing is installed yet — see
+`frontend/package.json`), then use it to close the APR/ROI/CL-reward gap.
+
+- [ ] Decide on a charting library (Recharts, visx, lightweight Plotly.js,
+      or similar) — needed by this stage and Stage 8.
+- [ ] APR 7d/31d/365d, ROI%, and CL-reward figures: blocked on either
+      beaconcha.in Phase 2 (tracked in this repo's `CLAUDE.md`) or a
+      chain-native CL-reward computation analogous to what
+      `fetch_earnings.py` already does for EL tips. Pick one before
+      starting this stage's data work.
+- [ ] Flesh out `/rewards` and `/staking-calculator` with real
+      charts/filtering once the above data exists. Remember
+      `Validator_Staking_Calc.ipynb`'s actual behavior (a checkbox-filtered
+      view of the same earnings data, summed) — don't build more than that
+      unless a real projection calculator is explicitly requested.
+
+### Stage 8 — Historical block-proposal data
+
+**Goal:** close the biggest data gap — full lifetime block-proposal history
+per validator, not just a recent scan window.
+
+- [ ] Resolve the underlying blocker: either export Prysm's
+      slashing-protection BoltDB (requires briefly stopping the live
+      validator service — needs yerry's go-ahead, already flagged in
+      `earnings.json`'s notes) or get beaconcha.in Phase 2 active.
+- [ ] `scripts/fetch_blocks.py` (or extend `fetch_earnings.py`) → a new
+      `blocks.json` with per-block reward/MEV/relay data.
+- [ ] Wire `/blocks` to real data, using Stage 7's charting library.
+- [ ] Revisit whether this also satisfies Stage 4 (the `SlotStrip`'s
+      placeholder) — likely yes, same underlying data source.
+
+### Stage 9 — Investor-pool accounting (deferred, gated)
+
+**Not started, and shouldn't be until yerry explicitly decides to.** The
+nav button and empty page exist from Stage 5; this stage is where real data
+would go, if approved. Needs, at minimum:
+
+- [ ] An explicit go/no-go conversation (sensitivity of real per-person
+      financial data + this repo's GitHub-Pages-may-be-public caveat).
+- [ ] If it's a go: a decision on where the real numbers live — almost
+      certainly **not** a committed JSON file the way `fleet.json` is
+      today, given the sensitivity difference. Options worth weighing then:
+      a private data source fetched at build time but not committed, an
+      access-gated route, or keeping this feature on a separate, non-public
+      surface entirely.
+- [ ] Everything else in this stage (chart/UI work) is straightforward once
+      the above is decided — it's the data-handling decision that's the
+      actual blocker, not the code.
 
 ## Where to look for how-tos
 
@@ -155,6 +290,8 @@ Roughly cheapest/lowest-risk → most involved, and independent of each other
 ## Status
 
 Written 2026-07-22, based on a read-through of every notebook/module in
-`SLC-DASHBOARD-2024` as of that date. Nothing in the "suggested migration
-order" section has been started yet — this is the plan, not a progress log.
-Update the relevant table row / gap item as each piece actually lands.
+`SLC-DASHBOARD-2024` as of that date. Expanded same day with the target nav
+structure and Stages 5–9. Nothing in Stages 5–9 has been started yet — this
+is the plan, not a progress log. Check off checklist items and update table
+rows as each piece actually lands; don't let this drift into fiction the way
+a stale status doc does.
