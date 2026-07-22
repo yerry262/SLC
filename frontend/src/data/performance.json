@@ -1,0 +1,379 @@
+{
+  "generatedAt": "2026-07-22T08:45:30.287014+00:00",
+  "currentEpoch": 463244,
+  "currentSlot": 14823824,
+  "validatorClientProcessStartedAt": "2026-07-14T03:30:07.590000+00:00",
+  "proposalScan": {
+    "epochsScannedTotal": 6,
+    "epochsScannedThisRun": [],
+    "totalConfirmedProposalsTracked": 0
+  },
+  "validators": [
+    {
+      "index": 23109,
+      "pubkey": "0x958950947f7cbdc728e09ba04ea38fafed0cab665ff93b4e177fbb37ef31744c3b8cd25d40d5fe347501636fde7406ca",
+      "status": "active",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": {
+          "head": true,
+          "source": true,
+          "target": true
+        },
+        "successfulAttestationsSinceProcessStart": 1850.0,
+        "participationRatePct": 100.0,
+        "rewardEffectivenessPct": 100.0,
+        "rewardEffectivenessEpochsSampled": [
+          463242,
+          463241,
+          463240,
+          463239,
+          463238,
+          463237
+        ],
+        "inactivityScore": 0.0,
+        "lastAttestedSlot": 14823824,
+        "nextAttestationSlot": 14823824
+      }
+    },
+    {
+      "index": 27234,
+      "pubkey": "0xb77c8d32b8354efde754708005d132693ee43d93a71b1dddba4a63681c42aa2bb4b29f6347761c492b70f784c9b8ba85",
+      "status": "active",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": {
+          "head": true,
+          "source": true,
+          "target": true
+        },
+        "successfulAttestationsSinceProcessStart": 1850.0,
+        "participationRatePct": 100.0,
+        "rewardEffectivenessPct": 100.0,
+        "rewardEffectivenessEpochsSampled": [
+          463242,
+          463241,
+          463240,
+          463239,
+          463238,
+          463237
+        ],
+        "inactivityScore": 0.0,
+        "lastAttestedSlot": 14823808,
+        "nextAttestationSlot": 14823808
+      }
+    },
+    {
+      "index": 27235,
+      "pubkey": "0x8aab72c29ac42a82a82b5246e1ea6a796507659b5f81cc026dba03794300765356dfffab9fe167141441c468c98f1f38",
+      "status": "active",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": {
+          "head": true,
+          "source": true,
+          "target": true
+        },
+        "successfulAttestationsSinceProcessStart": 1849.0,
+        "participationRatePct": 99.99,
+        "rewardEffectivenessPct": 100.0,
+        "rewardEffectivenessEpochsSampled": [
+          463242,
+          463241,
+          463240,
+          463239,
+          463238,
+          463237
+        ],
+        "inactivityScore": 0.0,
+        "lastAttestedSlot": 14823797,
+        "nextAttestationSlot": 14823838
+      }
+    },
+    {
+      "index": 47553,
+      "pubkey": "0x9055d6b87e8b88e9d47c5bafc7eb29f38222dceb741d46a0b2bb38626bc0e30dd05fd5c554d018e44e42d372b160a432",
+      "status": "active",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": {
+          "head": true,
+          "source": true,
+          "target": true
+        },
+        "successfulAttestationsSinceProcessStart": 1849.0,
+        "participationRatePct": 99.99,
+        "rewardEffectivenessPct": 100.0,
+        "rewardEffectivenessEpochsSampled": [
+          463242,
+          463241,
+          463240,
+          463239,
+          463238,
+          463237
+        ],
+        "inactivityScore": 0.0,
+        "lastAttestedSlot": 14823790,
+        "nextAttestationSlot": 14823829
+      }
+    },
+    {
+      "index": 73354,
+      "pubkey": "0x929421db53064c729ed6102bef7bf64fc76740f11f9eb21575aae70cd77878b20c69bdb1852ff922b909a24be3b4dc06",
+      "status": "exited",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": null,
+        "successfulAttestationsSinceProcessStart": null,
+        "participationRatePct": null,
+        "rewardEffectivenessPct": null,
+        "rewardEffectivenessEpochsSampled": [],
+        "inactivityScore": null,
+        "lastAttestedSlot": null,
+        "nextAttestationSlot": null
+      }
+    },
+    {
+      "index": 81070,
+      "pubkey": "0xa14fbb4bd79bc63145a0647e2ecdb1f7328be89012e139aa0fc5870a3831287302fa53c03703bfe7a46254c590acc426",
+      "status": "exited",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": null,
+        "successfulAttestationsSinceProcessStart": null,
+        "participationRatePct": null,
+        "rewardEffectivenessPct": null,
+        "rewardEffectivenessEpochsSampled": [],
+        "inactivityScore": null,
+        "lastAttestedSlot": null,
+        "nextAttestationSlot": null
+      }
+    },
+    {
+      "index": 88498,
+      "pubkey": "0x8d8d931090b195f2705e45310fcdf30d0e6ec8a12dbda8fba6bbc2c5049b4b3649fd296ccd59fcd6fdc31a1d78140ea3",
+      "status": "active",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": {
+          "head": true,
+          "source": true,
+          "target": true
+        },
+        "successfulAttestationsSinceProcessStart": 1850.0,
+        "participationRatePct": 100.0,
+        "rewardEffectivenessPct": 100.0,
+        "rewardEffectivenessEpochsSampled": [
+          463242,
+          463241,
+          463240,
+          463239,
+          463238,
+          463237
+        ],
+        "inactivityScore": 0.0,
+        "lastAttestedSlot": 14823814,
+        "nextAttestationSlot": 14823814
+      }
+    },
+    {
+      "index": 89972,
+      "pubkey": "0x93434087d139ff77050c1581e2eb550c8377fcb751fd9e07c907c8bda7e4aad61e9f2bdca19fed256ff643a35cb85cac",
+      "status": "active",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": {
+          "head": true,
+          "source": true,
+          "target": true
+        },
+        "successfulAttestationsSinceProcessStart": 1850.0,
+        "participationRatePct": 100.0,
+        "rewardEffectivenessPct": 100.0,
+        "rewardEffectivenessEpochsSampled": [
+          463242,
+          463241,
+          463240,
+          463239,
+          463238,
+          463237
+        ],
+        "inactivityScore": 0.0,
+        "lastAttestedSlot": 14823816,
+        "nextAttestationSlot": 14823816
+      }
+    },
+    {
+      "index": 111185,
+      "pubkey": "0xa60c6701d3b3686987a8dcbad2367fd7e0919983f99cddc8c8c3f21f89a12fdb53f69dec876f7bac4833fb19a5238649",
+      "status": "active",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": {
+          "head": true,
+          "source": true,
+          "target": true
+        },
+        "successfulAttestationsSinceProcessStart": 1850.0,
+        "participationRatePct": 100.0,
+        "rewardEffectivenessPct": 95.69,
+        "rewardEffectivenessEpochsSampled": [
+          463242,
+          463241,
+          463240,
+          463239,
+          463238,
+          463237
+        ],
+        "inactivityScore": 0.0,
+        "lastAttestedSlot": 14823818,
+        "nextAttestationSlot": 14823818
+      }
+    },
+    {
+      "index": 166200,
+      "pubkey": "0x820bbe4c8c19d21f0cf32257ced118aa43badb9c768d7854cc91f79b72f3d5472f47eab1b54477eb72fbb3ff10eeaebf",
+      "status": "active",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": {
+          "head": true,
+          "source": true,
+          "target": true
+        },
+        "successfulAttestationsSinceProcessStart": 1849.0,
+        "participationRatePct": 99.99,
+        "rewardEffectivenessPct": 100.0,
+        "rewardEffectivenessEpochsSampled": [
+          463242,
+          463241,
+          463240,
+          463239,
+          463238,
+          463237
+        ],
+        "inactivityScore": 0.0,
+        "lastAttestedSlot": 14823820,
+        "nextAttestationSlot": 14823820
+      }
+    },
+    {
+      "index": 590171,
+      "pubkey": "0x85e97d5a9bf9b934bd83a5b399ebe9e39bbaba6d686119d2f01d1ecf5a038a8932089ba505399d46d0dc62090fd9a101",
+      "status": "exited",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": null,
+        "successfulAttestationsSinceProcessStart": null,
+        "participationRatePct": null,
+        "rewardEffectivenessPct": null,
+        "rewardEffectivenessEpochsSampled": [],
+        "inactivityScore": null,
+        "lastAttestedSlot": null,
+        "nextAttestationSlot": null
+      }
+    },
+    {
+      "index": 1131947,
+      "pubkey": "0xa3095f33917c50deb0cd877c34a78f27686abc0db8ac42ca1c51791ab67f550f5fb172854c877a190e0516aba0486700",
+      "status": "exited",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": null,
+        "successfulAttestationsSinceProcessStart": null,
+        "participationRatePct": null,
+        "rewardEffectivenessPct": null,
+        "rewardEffectivenessEpochsSampled": [],
+        "inactivityScore": null,
+        "lastAttestedSlot": null,
+        "nextAttestationSlot": null
+      }
+    },
+    {
+      "index": 2032648,
+      "pubkey": "0x8007ad5fb5308d01886cf4fed6b7878a423e4f5619889e193f0e2ff0f70d4ba549553cfa76ed6702cb50dd50cb3d8570",
+      "status": "active",
+      "blocksProposed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "lifetimeCount": null
+      },
+      "attestation": {
+        "lastVoteCorrect": {
+          "head": true,
+          "source": true,
+          "target": true
+        },
+        "successfulAttestationsSinceProcessStart": 1849.0,
+        "participationRatePct": 99.99,
+        "rewardEffectivenessPct": 100.0,
+        "rewardEffectivenessEpochsSampled": [
+          463242,
+          463241,
+          463240,
+          463239,
+          463238,
+          463237
+        ],
+        "inactivityScore": 0.0,
+        "lastAttestedSlot": 14823802,
+        "nextAttestationSlot": 14823829
+      }
+    }
+  ],
+  "notes": [
+    "No per-validator lifetime block-proposal count exists anywhere on this node (no such metric is exposed, and the REST API has no cumulative/historical proposal endpoint). blocksProposed.lifetimeCount is null everywhere and blocksProposed.countTracked is a REAL but partial count, accumulated run-over-run in scripts/state/proposal_scan_log.json since tracking began (see proposalScan.epochsScannedTotal for exactly how much epoch history has been checked so far) \u2014 commit that state file so future CI runs keep extending coverage instead of restarting from zero.",
+    "Both the proposer-duty and attestation-rewards beacon REST endpoints only answer quickly (sub-few-seconds) for epochs within roughly the last 5-9 epochs of the current chain head on this node; older epochs measurably time out (tested: 10-15s+ with no response) because Prysm has to replay/regenerate non-cached archived state. This is a real, verified limitation of this specific node's configuration, not a script bug \u2014 it is why both the proposal scan and the reward-effectiveness window below only ever cover a handful of the most recent epochs per run.",
+    "attestation.rewardEffectivenessPct is actual-vs-ideal attestation reward (head+target+source points) for the validator's effective-balance tier, averaged over rewardEffectivenessEpochsSampled (a short recent finalized-epoch window, see constraint above) via POST /eth/v1/beacon/rewards/attestations/{epoch}. Only meaningful for active_ongoing validators; withdrawal_done validators show null (they earn no attestation reward once exited).",
+    "attestation.successfulAttestationsSinceProcessStart is a Prometheus COUNTER that resets on every validator-client process restart (see validatorClientProcessStartedAt) \u2014 it is NOT a lifetime total. participationRatePct divides it by elapsed epochs since that same restart, so it's a rolling rate over the current uptime window only, not the validator's full history.",
+    "Metrics-derived fields (lastVoteCorrect, successfulAttestationsSinceProcessStart, inactivityScore, lastAttestedSlot, nextAttestationSlot) are only present for validators the local validator client actively manages \u2014 i.e. status == 'active' \u2014 and are null for withdrawal_done validators, which the metrics endpoint doesn't report on at all."
+  ]
+}

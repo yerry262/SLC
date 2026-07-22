@@ -1,12 +1,26 @@
 import { SlotStrip } from './components/SlotStrip'
 import { FleetSummary } from './components/FleetSummary'
 import { ValidatorTable } from './components/ValidatorTable'
-import { mockFleet } from './data/mockFleet'
+import { PerformancePanel } from './components/PerformancePanel'
+import { EarningsPanel } from './components/EarningsPanel'
+import fleetData from './data/fleet.json'
+import earningsData from './data/earnings.json'
+import type { FleetSnapshot, EarningsSnapshot } from './types'
 import './App.css'
 
-function App() {
-  const { currentEpoch, slots, validators } = mockFleet
+const fleet = fleetData as FleetSnapshot
+const earnings = earningsData as EarningsSnapshot
 
+// Proposal/attestation-per-slot history isn't tracked yet (see
+// PerformancePanel's own notes) — render a neutral, unlit strip rather
+// than fabricating tick data. The epoch number itself is real.
+const neutralSlots = Array.from({ length: 32 }, (_, slot) => ({
+  slot,
+  proposedByUs: false,
+  missed: false,
+}))
+
+function App() {
   return (
     <div className="app">
       <header className="app__header">
@@ -14,12 +28,15 @@ function App() {
         <h1 className="app__title">Validator Watch</h1>
       </header>
 
-      <SlotStrip epoch={currentEpoch} slots={slots} />
+      <SlotStrip epoch={fleet.currentEpoch} slots={neutralSlots} />
 
       <div className="app__body">
-        <FleetSummary validators={validators} />
-        <ValidatorTable validators={validators} />
+        <FleetSummary validators={fleet.validators} earnings={earnings} />
+        <ValidatorTable validators={fleet.validators} />
       </div>
+
+      <PerformancePanel />
+      <EarningsPanel />
     </div>
   )
 }
