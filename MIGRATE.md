@@ -245,6 +245,18 @@ already talk to" work, no external API decisions needed.
       Run the script for real against the node before trusting these
       figures; a failed/dead address is written as `balanceEth: null` with
       an explicit unavailable-count notice in the UI, not silently dropped.
+      **Follow-up same day:** `Varibles.py`'s `wallet_alias` labels
+      ("Validator 1 Tip Jar", etc.) are generic 2024-era ordinals with no
+      link to which validator actually owns each wallet, and they predate
+      our newest validator (`2032648`), which turns out to silently share
+      wallet #4's address with `47553` (same default `fee_recipient`) —
+      invisible under the old labels. `fetch_wallets.py` now cross-
+      references each address against `earnings.json`'s already-fetched
+      `feeRecipient` field and records every real validator index that
+      matches (`Wallet.validatorIndices`, a live-derived array, not
+      hardcoded); `WalletsPage.tsx` shows it as its own column. This part
+      of `wallets.json` (the cross-reference) is computed from *real*
+      committed `earnings.json` data, unlike the balances above.
 - [x] "ETH until next validator" countdown: compute client-side from
       `wallets.json`'s total, not stored as a snapshot field (it's a pure
       function of the balance and the 32 ETH threshold, storing it risks it

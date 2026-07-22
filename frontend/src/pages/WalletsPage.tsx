@@ -33,6 +33,13 @@ function isKnownBalance(w: Wallet): w is Wallet & { balanceEth: number } {
  * (illiquid)" section is superseded by fleet.json/FleetSummary and isn't
  * repeated here). Self-contained (own header/layout) so it can be dropped
  * into a router as its own route without depending on App.tsx.
+ *
+ * The "validator" column is a real cross-reference against earnings.json's
+ * feeRecipient data (fetch_wallets.py), not the old Varibles.py's generic
+ * "Validator N Tip Jar" ordinal labels — those predate our newest
+ * validator and have no link to real validator indices. A wallet can map
+ * to more than one index (shared default fee_recipient) or none (Weekly
+ * Base Pay, Deployer aren't fee recipients at all).
  */
 export function WalletsPage() {
   const { wallets: walletList, notes } = wallets
@@ -93,6 +100,7 @@ export function WalletsPage() {
             <tr>
               <th scope="col">wallet</th>
               <th scope="col">alias</th>
+              <th scope="col">validator</th>
               <th scope="col">balance</th>
             </tr>
           </thead>
@@ -105,6 +113,13 @@ export function WalletsPage() {
                   </a>
                 </td>
                 <td>{w.alias}</td>
+                <td className="wallets-page__mono">
+                  {w.validatorIndices.length === 0 ? (
+                    <span className="wallets-page__cell--unavailable">—</span>
+                  ) : (
+                    w.validatorIndices.map((idx) => `#${idx}`).join(', ')
+                  )}
+                </td>
                 <td className={w.balanceEth === null ? 'wallets-page__mono wallets-page__cell--unavailable' : 'wallets-page__mono'}>
                   {w.balanceEth === null ? 'n/a' : `${w.balanceEth.toFixed(4)} ETH`}
                 </td>
