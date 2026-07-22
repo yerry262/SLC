@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import { Dashboard } from '../pages/Dashboard'
 import { MissionPage } from '../pages/MissionPage'
+import { WalletsPage } from '../pages/WalletsPage'
 import { ComingSoon } from '../components/ComingSoon'
 
 export interface RouteConfig {
@@ -72,12 +73,7 @@ export const routes: RouteConfig[] = [
   {
     path: '/wallets',
     label: 'Wallets',
-    element: (
-      <ComingSoon
-        title="Wallets"
-        description="Liquid tip-jar wallet balances (accumulated fee-recipient balances, plus the ETH-until-next-validator countdown) aren't fetched yet. Illiquid validator balances already appear in the Fleet Summary on the Dashboard."
-      />
-    ),
+    element: <WalletsPage />,
   },
 ]
 
