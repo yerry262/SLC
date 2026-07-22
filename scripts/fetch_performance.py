@@ -102,8 +102,10 @@ def load_fleet():
 def load_state():
     if os.path.exists(STATE_PATH):
         with open(STATE_PATH) as f:
-            return json.load(f)
-    return {"scannedEpochs": [], "confirmedProposals": []}
+            state = json.load(f)
+            state.setdefault("confirmedMisses", [])
+            return state
+    return {"scannedEpochs": [], "confirmedProposals": [], "confirmedMisses": []}
 
 
 def save_state(state):
@@ -239,9 +241,16 @@ def confirm_block_proposed(slot):
 
 
 def scan_for_proposals(fleet_index_set, current_epoch, state):
+    """Walks the proposer-DUTY schedule (who was SCHEDULED), not just realized
+    headers — this is the only way to attribute a MISSED slot to one of our
+    validators specifically, since a missing header alone doesn't say who was
+    assigned to it. Only cheap near head (see module docstring), so misses
+    recorded here are real but forward-tracked-only, same limitation as
+    confirmedProposals below (never a lifetime/historical claim)."""
     already_scanned = set(state["scannedEpochs"])
     new_scanned = []
     new_hits = []
+    new_misses = []
     epoch = current_epoch
     attempts = 0
     while attempts < MAX_BACKWARD_PROPOSER_ATTEMPTS:
@@ -260,8 +269,7 @@ def scan_for_proposals(fleet_index_set, current_epoch, state):
                 proposed = confirm_block_proposed(slot)
                 print(f"  epoch {epoch} slot {slot}: our validator {vidx} scheduled, "
                       f"proposed={proposed}", file=sys.stderr)
-                if proposed:
-                    new_hits.append({"epoch": epoch, "slot": slot, "validatorIndex": vidx})
+                (new_hits if proposed else new_misses).append({"epoch": epoch, "slot": slot, "validatorIndex": vidx})
         epoch -= 1
 
     state["scannedEpochs"] = sorted(set(state["scannedEpochs"]) | set(new_scanned))
@@ -269,7 +277,11 @@ def scan_for_proposals(fleet_index_set, current_epoch, state):
     for hit in new_hits:
         if hit["slot"] not in existing_slots:
             state["confirmedProposals"].append(hit)
-    return new_scanned, new_hits
+    existing_miss_slots = {p["slot"] for p in state["confirmedMisses"]}
+    for miss in new_misses:
+        if miss["slot"] not in existing_miss_slots:
+            state["confirmedMisses"].append(miss)
+    return new_scanned, new_hits, new_misses
 
 
 def main():
@@ -293,16 +305,20 @@ def main():
     effectiveness_pct, reward_gwei, reward_epochs_sampled = compute_attestation_effectiveness(active_indices)
     print(f"attestation-reward effectiveness sampled over epochs {reward_epochs_sampled}", file=sys.stderr)
 
-    # --- block proposals (accumulating scan) ---
+    # --- block proposals + misses (accumulating scan) ---
     state = load_state()
-    new_scanned, new_hits = scan_for_proposals(fleet_index_set, current_epoch, state)
+    new_scanned, new_hits, new_misses = scan_for_proposals(fleet_index_set, current_epoch, state)
     print(f"proposer-duty scan: {len(new_scanned)} new epoch(s) scanned this run "
-          f"({new_scanned}), {len(new_hits)} new confirmed proposal(s)", file=sys.stderr)
+          f"({new_scanned}), {len(new_hits)} new confirmed proposal(s), "
+          f"{len(new_misses)} new confirmed miss(es)", file=sys.stderr)
     save_state(state)
 
     proposals_by_index = {}
     for p in state["confirmedProposals"]:
         proposals_by_index.setdefault(p["validatorIndex"], []).append(p)
+    misses_by_index = {}
+    for m in state["confirmedMisses"]:
+        misses_by_index.setdefault(m["validatorIndex"], []).append(m)
 
     out_validators = []
     for v in validators:
@@ -324,6 +340,7 @@ def main():
             }
 
         my_proposals = sorted(proposals_by_index.get(idx, []), key=lambda p: -p["slot"])
+        my_misses = sorted(misses_by_index.get(idx, []), key=lambda p: -p["slot"])
 
         out_validators.append({
             "index": idx,
@@ -333,6 +350,11 @@ def main():
                 "countTracked": len(my_proposals),
                 "recentSlots": [p["slot"] for p in my_proposals[:10]],
                 "lifetimeCount": None,  # not obtainable cheaply from this node — see notes
+            },
+            "blocksMissed": {
+                "countTracked": len(my_misses),
+                "recentSlots": [p["slot"] for p in my_misses[:10]],
+                "trackedSince": "forward-only, near-head duty scan — see notes",
             },
             "attestation": {
                 "lastVoteCorrect": last_vote,  # from most recent metrics scrape, active validators only
@@ -362,6 +384,7 @@ def main():
             "epochsScannedTotal": len(state["scannedEpochs"]),
             "epochsScannedThisRun": new_scanned,
             "totalConfirmedProposalsTracked": len(state["confirmedProposals"]),
+            "totalConfirmedMissesTracked": len(state["confirmedMisses"]),
         },
         "validators": out_validators,
         "notes": [
@@ -372,6 +395,15 @@ def main():
             "since tracking began (see proposalScan.epochsScannedTotal for exactly how much epoch "
             "history has been checked so far) — commit that state file so future CI runs keep "
             "extending coverage instead of restarting from zero.",
+            "blocksMissed is the sibling of blocksProposed, same accumulating state file: a slot "
+            "counts as a confirmed miss only when the proposer-duty schedule shows one of OUR "
+            "validators was SCHEDULED for it and no block header exists at that slot. This is "
+            "possible ONLY within this scan's near-head window (see the timing constraint above) — "
+            "there is no way to attribute a historical miss to a specific validator without duty "
+            "data, which is exactly the same limitation frontend/src/data/blocks.json's own notes "
+            "describe for scripts/fetch_blocks.py's separate (deeper, but proposed-only) header-walk "
+            "scan. blocksMissed.countTracked is real but only ever covers time since this tracking "
+            "began — never treat it as a lifetime or historical miss rate.",
             "Both the proposer-duty and attestation-rewards beacon REST endpoints only answer quickly "
             "(sub-few-seconds) for epochs within roughly the last 5-9 epochs of the current chain head "
             "on this node; older epochs measurably time out (tested: 10-15s+ with no response) because "

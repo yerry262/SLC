@@ -129,9 +129,12 @@ Notes for whoever builds the nav shell (Stage 5):
    `eth_getBalance` calls against the node's Geth RPC, same pattern
    `fetch_fleet.py` already uses for other data. → **Stage 6**
 2. **Historical/lifetime block-proposal data** (`Validator_Staking_Blocks.ipynb`)
-   — blocked on the same Prysm slashing-protection DB export (or beaconcha.in
-   Phase 2) already called out in `earnings.json`'s own notes. Not a new
-   blocker, just not yet actioned. → **Stage 8**
+   — **proposed-block half done, Stage 8, 2026-07-22**: unblocked via a
+   header-walk (no Prysm-DB export or beaconcha.in needed for *proposed*
+   blocks specifically — see Stage 8's notes). Missed-slot attribution is
+   still near-head-only (`fetch_performance.py`), not a full lifetime miss
+   count — that part remains genuinely blocked the way this doc originally
+   described.
 3. **APR / ROI% metrics and CL-reward figures** (`Validator_Earnings.ipynb`) —
    blocked on beaconcha.in Phase 2 (HTML scraping is confirmed dead) or a
    from-chain computation of consensus-layer rewards analogous to what
@@ -288,15 +291,52 @@ already talk to" work, no external API decisions needed.
 **Goal:** close the biggest data gap — full lifetime block-proposal history
 per validator, not just a recent scan window.
 
-- [ ] Resolve the underlying blocker: either export Prysm's
-      slashing-protection BoltDB (requires briefly stopping the live
-      validator service — needs yerry's go-ahead, already flagged in
-      `earnings.json`'s notes) or get beaconcha.in Phase 2 active.
-- [ ] `scripts/fetch_blocks.py` (or extend `fetch_earnings.py`) → a new
-      `blocks.json` with per-block reward/MEV/relay data.
-- [ ] Wire `/blocks` to real data, using Stage 7's charting library.
+**Unblocked 2026-07-22 via a third path this doc hadn't considered when
+written**: neither Prysm-DB export nor beaconcha.in Phase 2 turned out to
+be required for *proposed*-block history specifically. A realized block's
+header permanently embeds its `proposer_index` — that's just historical
+chain data, cheap to read at any depth via `GET
+/eth/v1/beacon/headers/{slot}`, unlike the proposer-*duty* schedule (`GET
+/eth/v1/validator/duties/proposer/{epoch}`), which needs Prysm to
+regenerate archived beacon state and (per `fetch_performance.py`'s own
+re-verified research) only answers quickly within ~5-9 epochs of head. So:
+**proposed** blocks are fully knowable at any historical depth (header
+walk); **missed** slots attributable to a *specific* one of our validators
+are not — that still needs the duty schedule and is therefore still
+near-head/forward-only, exactly like `fetch_performance.py`'s existing
+scan. This stage ships the proposed-block half for real; missed-slot
+tracking is intentionally left to `fetch_performance.py`'s existing
+mechanism rather than faked here.
+
+- [x] `scripts/fetch_blocks.py`: resumable, checkpointed header-walk (state
+      in `scripts/state/block_history_scan_log.json`, committed) →
+      `frontend/src/data/blocks.json` with real per-block priority-fee
+      revenue (same method as `fetch_earnings.py`'s
+      `compute_block_el_revenue`). **Script done 2026-07-22.**
+      `blocks.json`'s committed content is **hand-written sample/fixture
+      data** (3 illustrative proposals), same honesty convention as
+      `wallets.json`/`price.json` — this sandbox has no `ethereum-wg`
+      access. Run the script for real on/near the node to replace it; each
+      run extends `scanProgress` incrementally (a full walk to our oldest
+      validator's activation slot is a multi-million-slot job, not a
+      single run).
+- [x] Wire `/blocks` to real data. **Done 2026-07-22** —
+      `frontend/src/pages/BlocksPage.tsx`, mounted at `/blocks` in
+      `routing/routes.tsx`. No charting library used (table only) —
+      whichever charting library Stage 7 lands with can enhance this later,
+      not a blocker for shipping the real data.
+- [x] Missed-slot tracking (the other half of "proposed or missed"):
+      **extended `fetch_performance.py` 2026-07-22** rather than building
+      it here — added `confirmedMisses`/`blocksMissed` alongside its
+      existing `confirmedProposals`/`blocksProposed`, same accumulating
+      state file, same near-head-only honesty caveat. Surfaced via the
+      Performance panel on the Dashboard, not this page — `BlocksPage` says
+      so explicitly rather than silently omitting misses.
 - [ ] Revisit whether this also satisfies Stage 4 (the `SlotStrip`'s
-      placeholder) — likely yes, same underlying data source.
+      placeholder) — not done in this pass; `SlotStrip` still renders the
+      neutral placeholder. The same header-walk data could likely drive it
+      — worth a follow-up once `fetch_blocks.py` has real (not sample) data
+      to check against.
 
 ### Stage 9 — Investor-pool accounting (deferred, gated)
 

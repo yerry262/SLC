@@ -6,7 +6,8 @@
   "proposalScan": {
     "epochsScannedTotal": 6,
     "epochsScannedThisRun": [],
-    "totalConfirmedProposalsTracked": 0
+    "totalConfirmedProposalsTracked": 0,
+    "totalConfirmedMissesTracked": 0
   },
   "validators": [
     {
@@ -38,6 +39,11 @@
         "inactivityScore": 0.0,
         "lastAttestedSlot": 14823824,
         "nextAttestationSlot": 14823824
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -69,6 +75,11 @@
         "inactivityScore": 0.0,
         "lastAttestedSlot": 14823808,
         "nextAttestationSlot": 14823808
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -100,6 +111,11 @@
         "inactivityScore": 0.0,
         "lastAttestedSlot": 14823797,
         "nextAttestationSlot": 14823838
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -131,6 +147,11 @@
         "inactivityScore": 0.0,
         "lastAttestedSlot": 14823790,
         "nextAttestationSlot": 14823829
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -151,6 +172,11 @@
         "inactivityScore": null,
         "lastAttestedSlot": null,
         "nextAttestationSlot": null
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -171,6 +197,11 @@
         "inactivityScore": null,
         "lastAttestedSlot": null,
         "nextAttestationSlot": null
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -202,6 +233,11 @@
         "inactivityScore": 0.0,
         "lastAttestedSlot": 14823814,
         "nextAttestationSlot": 14823814
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -233,6 +269,11 @@
         "inactivityScore": 0.0,
         "lastAttestedSlot": 14823816,
         "nextAttestationSlot": 14823816
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -264,6 +305,11 @@
         "inactivityScore": 0.0,
         "lastAttestedSlot": 14823818,
         "nextAttestationSlot": 14823818
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -295,6 +341,11 @@
         "inactivityScore": 0.0,
         "lastAttestedSlot": 14823820,
         "nextAttestationSlot": 14823820
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -315,6 +366,11 @@
         "inactivityScore": null,
         "lastAttestedSlot": null,
         "nextAttestationSlot": null
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -335,6 +391,11 @@
         "inactivityScore": null,
         "lastAttestedSlot": null,
         "nextAttestationSlot": null
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -366,6 +427,11 @@
         "inactivityScore": 0.0,
         "lastAttestedSlot": 14823802,
         "nextAttestationSlot": 14823829
+      },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     }
   ],
