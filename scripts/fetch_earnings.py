@@ -147,12 +147,16 @@ def fetch_fee_recipient_config():
     slc-data-refresh systemd timer — see scripts/refresh_data.sh), the file
     is simply present locally; otherwise fall back to a read-only `cat`
     over the ethereum-wg SSH mesh link. Returns None (never a guess) if
-    both paths are unavailable."""
+    both paths are unavailable.
+
+    Returns (config, source_label) — the label feeds the snapshot's
+    feeRecipientConfigSource provenance field, so it must say how the file
+    was ACTUALLY read, not assume the SSH path."""
     local_path = os.path.expanduser("~/prysm/configs/validator_tip.json")
     if os.path.exists(local_path):
         try:
             with open(local_path) as f:
-                return json.load(f)
+                return json.load(f), "validator_tip.json read locally on the node"
         except (OSError, json.JSONDecodeError) as e:
             print(f"  fee-recipient config: local read failed ({e}), trying ssh", file=sys.stderr)
     try:
@@ -163,15 +167,15 @@ def fetch_fee_recipient_config():
         )
     except Exception as e:
         print(f"  fee-recipient config: ssh failed ({e.__class__.__name__})", file=sys.stderr)
-        return None
+        return None, None
     if out.returncode != 0 or not out.stdout.strip():
         print(f"  fee-recipient config: ssh/cat failed (rc={out.returncode}): {out.stderr.strip()[:200]}", file=sys.stderr)
-        return None
+        return None, None
     try:
-        return json.loads(out.stdout)
+        return json.loads(out.stdout), "validator_tip.json via ssh ethereum-wg"
     except json.JSONDecodeError as e:
         print(f"  fee-recipient config: unparsable JSON ({e})", file=sys.stderr)
-        return None
+        return None, None
 
 
 # --- 3. Scan headers backward for our proposer_index values ---
@@ -255,8 +259,8 @@ def main():
     our_indices = {v["index"] for v in validators}
     print(f"  {len(validators)} validators: {sorted(our_indices)}", file=sys.stderr)
 
-    print(f"fetching fee-recipient config (ssh ethereum-wg)...", file=sys.stderr)
-    tip_config = fetch_fee_recipient_config()
+    print(f"fetching fee-recipient config (local file or ssh ethereum-wg)...", file=sys.stderr)
+    tip_config, tip_config_source = fetch_fee_recipient_config()
     proposer_config = (tip_config or {}).get("proposer_config", {})
     default_fee_recipient = (tip_config or {}).get("default_config", {}).get("fee_recipient")
 
@@ -371,7 +375,7 @@ def main():
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "method": "live chain data (Geth + Prysm beacon API on our own node); no beaconcha.in, no fabricated figures",
         "depositAddress": DEPOSIT_ADDRESS,
-        "feeRecipientConfigSource": "unavailable (ssh to ethereum-wg failed)" if tip_config is None else "validator_tip.json via ssh ethereum-wg",
+        "feeRecipientConfigSource": "unavailable (no local file, ssh to ethereum-wg failed)" if tip_config is None else tip_config_source,
         "defaultFeeRecipient": default_fee_recipient,
         "scanWindow": {
             "headSlot": head_slot,
