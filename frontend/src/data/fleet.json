@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-23T01:38:39.146477+00:00",
+  "generatedAt": "2026-07-23T01:42:21.825089+00:00",
   "discoverySource": "prysm-metrics (local, verified per-validator against DEPOSIT_ADDRESS)",
   "depositAddress": "0x95aed4dc9acc614415d3bc56711998b8041878eb",
-  "currentEpoch": 463402,
+  "currentEpoch": 463403,
   "validators": [
     {
       "index": 23109,
@@ -32,7 +32,7 @@
       "index": 47553,
       "pubkey": "0x9055d6b87e8b88e9d47c5bafc7eb29f38222dceb741d46a0b2bb38626bc0e30dd05fd5c554d018e44e42d372b160a432",
       "status": "active",
-      "balanceEth": 32.786,
+      "balanceEth": 32.7861,
       "activationEpoch": 6667,
       "daysOnline": 2029
     },

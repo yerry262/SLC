@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-07-23T01:38:52.848904+00:00",
+  "generatedAt": "2026-07-23T01:42:34.724230+00:00",
   "method": "computed from frontend/src/data/fleet.json's balanceEth/activationEpoch fields (no live node call, no beaconcha.in call \u2014 see notes)",
-  "sourceFleetGeneratedAt": "2026-07-23T01:38:39.146477+00:00",
+  "sourceFleetGeneratedAt": "2026-07-23T01:42:21.825089+00:00",
   "baseStakeEth": 32.0,
   "fleetSummary": {
     "validatorsTracked": 9,
     "validatorsTotal": 13,
-    "totalClRewardEth": 7.8024,
+    "totalClRewardEth": 7.8025,
     "avgRoiPct": 2.7092,
-    "avgAnnualizedPct": 1.1142
+    "avgAnnualizedPct": 1.1141
   },
   "validators": [
     {
@@ -46,8 +46,8 @@
       "pubkey": "0x9055d6b87e8b88e9d47c5bafc7eb29f38222dceb741d46a0b2bb38626bc0e30dd05fd5c554d018e44e42d372b160a432",
       "status": "active",
       "daysSinceActivation": 2029.94,
-      "clRewardEth": 0.786,
-      "roiPct": 2.4563,
+      "clRewardEth": 0.7861,
+      "roiPct": 2.4566,
       "annualizedPct": 0.442,
       "unavailableReason": null
     },
@@ -75,7 +75,7 @@
       "index": 88498,
       "pubkey": "0x8d8d931090b195f2705e45310fcdf30d0e6ec8a12dbda8fba6bbc2c5049b4b3649fd296ccd59fcd6fdc31a1d78140ea3",
       "status": "active",
-      "daysSinceActivation": 1984.44,
+      "daysSinceActivation": 1984.45,
       "clRewardEth": 0.6383,
       "roiPct": 1.9947,
       "annualizedPct": 0.3671,
@@ -85,7 +85,7 @@
       "index": 89972,
       "pubkey": "0x93434087d139ff77050c1581e2eb550c8377fcb751fd9e07c907c8bda7e4aad61e9f2bdca19fed256ff643a35cb85cac",
       "status": "active",
-      "daysSinceActivation": 1982.8,
+      "daysSinceActivation": 1982.81,
       "clRewardEth": 0.7795,
       "roiPct": 2.4359,
       "annualizedPct": 0.4487,
@@ -138,7 +138,7 @@
       "daysSinceActivation": 358.24,
       "clRewardEth": 2.1271,
       "roiPct": 6.6472,
-      "annualizedPct": 6.7774,
+      "annualizedPct": 6.7773,
       "unavailableReason": null
     }
   ],
