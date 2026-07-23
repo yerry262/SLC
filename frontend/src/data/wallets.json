@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T01:35:05.792657+00:00",
+  "generatedAt": "2026-07-23T01:38:52.588152+00:00",
   "method": "eth_getBalance (Geth JSON-RPC, 'latest') against the home node over ethereum-wg",
   "nodeSource": "http://localhost:8545",
   "wallets": [
@@ -13,73 +13,98 @@
       "address": "0xeB0fFc1F050347d96a739F214761C16bF4ad7dcb",
       "alias": "Validator 1 Tip Jar",
       "balanceEth": 0.004419,
-      "validatorIndices": []
+      "validatorIndices": [
+        23109
+      ]
     },
     {
       "address": "0xE3a725551afAEaF98837FD62729657A5A3113362",
       "alias": "Validator 2 Tip Jar",
       "balanceEth": 0.011006,
-      "validatorIndices": []
+      "validatorIndices": [
+        27235
+      ]
     },
     {
       "address": "0xaf5DA15C219dF670acb8Eb67e461505C23fc04C1",
       "alias": "Validator 3 Tip Jar",
       "balanceEth": 0.011483,
-      "validatorIndices": []
+      "validatorIndices": [
+        27234
+      ]
     },
     {
       "address": "0x1bbdD9733Cc44A52b7b3eEEf3ef6cA82dBE2B912",
       "alias": "Validator 4 Tip Jar",
       "balanceEth": 0.011812,
-      "validatorIndices": []
+      "validatorIndices": [
+        47553,
+        2032648
+      ]
     },
     {
       "address": "0x3C59c60Ab65C4B5A704EbeBF8EA397bf06dFAD8E",
       "alias": "Validator 5 Tip Jar",
       "balanceEth": 0.000187,
-      "validatorIndices": []
+      "validatorIndices": [
+        73354
+      ]
     },
     {
       "address": "0x8d9dA7A7053049691265535573A2f572391b072C",
       "alias": "Validator 6 Tip Jar",
       "balanceEth": 0.0,
-      "validatorIndices": []
+      "validatorIndices": [
+        81070
+      ]
     },
     {
       "address": "0xC56b8D60B0518880fF5AAB65515b845dad89443D",
       "alias": "Validator 7 Tip Jar",
       "balanceEth": 0.073782,
-      "validatorIndices": []
+      "validatorIndices": [
+        88498
+      ]
     },
     {
       "address": "0x143988FBf1438ff7b4404Ae3B204f8a387611eC8",
       "alias": "Validator 8 Tip Jar",
       "balanceEth": 0.005029,
-      "validatorIndices": []
+      "validatorIndices": [
+        89972
+      ]
     },
     {
       "address": "0x107580CD8CE9A9993ACE42682aB5Cd0BCccB0517",
       "alias": "Validator 9 Tip Jar",
       "balanceEth": 0.073991,
-      "validatorIndices": []
+      "validatorIndices": [
+        111185
+      ]
     },
     {
       "address": "0x26C4d9c0982EdC7f8fB32F428159A4ba17060A93",
       "alias": "Validator 10 Tip Jar",
       "balanceEth": 0.062507,
-      "validatorIndices": []
+      "validatorIndices": [
+        166200
+      ]
     },
     {
       "address": "0x7fcD9a1621345Bad2E5f2b8F4385C19C30600d6d",
       "alias": "Validator 11 Tip Jar",
       "balanceEth": 3e-06,
-      "validatorIndices": []
+      "validatorIndices": [
+        590171
+      ]
     },
     {
       "address": "0x37b08CEF6c90B6a185ef062486dC7070d09Cec36",
       "alias": "Validator 12 Tip Jar",
       "balanceEth": 4e-06,
-      "validatorIndices": []
+      "validatorIndices": [
+        1131947
+      ]
     },
     {
       "address": "0x95aed4dc9acc614415d3bc56711998b8041878eb",

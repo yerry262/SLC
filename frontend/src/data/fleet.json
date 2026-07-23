@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-23T01:34:49.126489+00:00",
+  "generatedAt": "2026-07-23T01:38:39.146477+00:00",
   "discoverySource": "prysm-metrics (local, verified per-validator against DEPOSIT_ADDRESS)",
   "depositAddress": "0x95aed4dc9acc614415d3bc56711998b8041878eb",
   "currentEpoch": 463402,
