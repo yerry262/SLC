@@ -30,15 +30,21 @@ snapshot at runtime — it never calls any API directly from the browser, so
 no key/secret is ever shipped to the client bundle.
 
 - **Phase 1 (now)**: data pulled directly from our own node's Geth/Prysm RPC
-  over `ethereum-wg` (LAN/WireGuard-only). This means the CI job needs to run
-  somewhere that can reach the mesh — plain `ubuntu-latest` cannot; needs a
-  self-hosted runner (candidate: Legion or the ethereum node itself). Open
-  question for planning.
-- **Phase 2 (later)**: migrate the data-fetch step to beaconcha.in's API once
-  the account has an active plan (`BEACONCHAIN_API` is currently zero-quota —
-  see `reference_beaconchain_api_key` memory). At that point the fetch step
-  can likely run on standard `ubuntu-latest` again, since beaconcha.in is
-  public.
+  (LAN/WireGuard-only — plain `ubuntu-latest` cannot reach it). Resolved
+  2026-07-22: instead of a self-hosted Actions runner, a **systemd timer on
+  the ethereum node itself** runs `scripts/refresh_data.sh`
+  (`slc-data-refresh.timer`, every 6h) — fetches with `NODE_IP=localhost`,
+  commits the refreshed JSONs, and pushes to `main`, which triggers the
+  normal `deploy.yml` Pages build on `ubuntu-latest`. No runner daemon, no
+  Railway, no paid APIs. The node's clone lives at `~/SLC`
+  (`ethereum@yerry.local`) and pushes over a repo-scoped write deploy key.
+  Automated snapshot commits to `main` are a deliberate exception to the
+  PR-based change workflow.
+- **Phase 2 (only if ever needed)**: migrate the data-fetch step to
+  beaconcha.in's API (`BEACONCHAIN_API` is currently zero-quota — see
+  `reference_beaconchain_api_key` memory). Deliberately NOT planned while
+  the node-local pipeline works — it would reintroduce a paid dependency
+  for no capability gain.
 
 ## Tech Stack
 
