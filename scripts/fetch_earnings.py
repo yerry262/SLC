@@ -141,10 +141,20 @@ def discover_validators():
 # --- 2. Fee-recipient config, read live from the node over SSH ---
 
 def fetch_fee_recipient_config():
-    """Reads ~/prysm/configs/validator_tip.json live over the ethereum-wg
-    SSH mesh link (read-only `cat`). This file lives on the node's
-    filesystem, not exposed via Geth/Prysm RPC, so there's no HTTP-only way
-    to get it. Returns None (never a guess) if SSH is unreachable."""
+    """Reads ~/prysm/configs/validator_tip.json. This file lives on the
+    node's filesystem, not exposed via Geth/Prysm RPC, so there's no
+    HTTP-only way to get it. When this script runs on the node itself (the
+    slc-data-refresh systemd timer — see scripts/refresh_data.sh), the file
+    is simply present locally; otherwise fall back to a read-only `cat`
+    over the ethereum-wg SSH mesh link. Returns None (never a guess) if
+    both paths are unavailable."""
+    local_path = os.path.expanduser("~/prysm/configs/validator_tip.json")
+    if os.path.exists(local_path):
+        try:
+            with open(local_path) as f:
+                return json.load(f)
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"  fee-recipient config: local read failed ({e}), trying ssh", file=sys.stderr)
     try:
         out = subprocess.run(
             ["ssh", "-o", "ConnectTimeout=6", "-o", "BatchMode=yes", "ethereum-wg",
