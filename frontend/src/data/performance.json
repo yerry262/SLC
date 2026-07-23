@@ -1,11 +1,18 @@
 {
-  "generatedAt": "2026-07-22T08:45:30.287014+00:00",
-  "currentEpoch": 463244,
-  "currentSlot": 14823824,
+  "generatedAt": "2026-07-23T01:35:02.014346+00:00",
+  "currentEpoch": 463402,
+  "currentSlot": 14828872,
   "validatorClientProcessStartedAt": "2026-07-14T03:30:07.590000+00:00",
   "proposalScan": {
-    "epochsScannedTotal": 6,
-    "epochsScannedThisRun": [],
+    "epochsScannedTotal": 12,
+    "epochsScannedThisRun": [
+      463402,
+      463401,
+      463400,
+      463399,
+      463398,
+      463397
+    ],
     "totalConfirmedProposalsTracked": 0,
     "totalConfirmedMissesTracked": 0
   },
@@ -19,31 +26,32 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": {
           "head": true,
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 1850.0,
+        "successfulAttestationsSinceProcessStart": 2008.0,
         "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
+        "rewardEthSampled": 5.0908e-05,
         "rewardEffectivenessEpochsSampled": [
-          463242,
-          463241,
-          463240,
-          463239,
-          463238,
-          463237
+          463400,
+          463399,
+          463398,
+          463397,
+          463396,
+          463395
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 14823824,
-        "nextAttestationSlot": 14823824
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
+        "lastAttestedSlot": 14828865,
+        "nextAttestationSlot": 14828865
       }
     },
     {
@@ -55,31 +63,32 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": {
           "head": true,
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 1850.0,
+        "successfulAttestationsSinceProcessStart": 2007.0,
         "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
+        "rewardEthSampled": 5.0908e-05,
         "rewardEffectivenessEpochsSampled": [
-          463242,
-          463241,
-          463240,
-          463239,
-          463238,
-          463237
+          463400,
+          463399,
+          463398,
+          463397,
+          463396,
+          463395
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 14823808,
-        "nextAttestationSlot": 14823808
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
+        "lastAttestedSlot": 14828832,
+        "nextAttestationSlot": 14828882
       }
     },
     {
@@ -91,31 +100,32 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": {
           "head": true,
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 1849.0,
-        "participationRatePct": 99.99,
+        "successfulAttestationsSinceProcessStart": 2007.0,
+        "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
+        "rewardEthSampled": 5.0908e-05,
         "rewardEffectivenessEpochsSampled": [
-          463242,
-          463241,
-          463240,
-          463239,
-          463238,
-          463237
+          463400,
+          463399,
+          463398,
+          463397,
+          463396,
+          463395
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 14823797,
-        "nextAttestationSlot": 14823838
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
+        "lastAttestedSlot": 14828858,
+        "nextAttestationSlot": 14828878
       }
     },
     {
@@ -127,31 +137,32 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": {
           "head": true,
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 1849.0,
-        "participationRatePct": 99.99,
+        "successfulAttestationsSinceProcessStart": 2007.0,
+        "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
+        "rewardEthSampled": 5.0908e-05,
         "rewardEffectivenessEpochsSampled": [
-          463242,
-          463241,
-          463240,
-          463239,
-          463238,
-          463237
+          463400,
+          463399,
+          463398,
+          463397,
+          463396,
+          463395
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 14823790,
-        "nextAttestationSlot": 14823829
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
+        "lastAttestedSlot": 14828841,
+        "nextAttestationSlot": 14828886
       }
     },
     {
@@ -163,20 +174,21 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": null,
         "successfulAttestationsSinceProcessStart": null,
         "participationRatePct": null,
         "rewardEffectivenessPct": null,
+        "rewardEthSampled": null,
         "rewardEffectivenessEpochsSampled": [],
         "inactivityScore": null,
         "lastAttestedSlot": null,
         "nextAttestationSlot": null
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -188,20 +200,21 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": null,
         "successfulAttestationsSinceProcessStart": null,
         "participationRatePct": null,
         "rewardEffectivenessPct": null,
+        "rewardEthSampled": null,
         "rewardEffectivenessEpochsSampled": [],
         "inactivityScore": null,
         "lastAttestedSlot": null,
         "nextAttestationSlot": null
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -213,31 +226,32 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": {
           "head": true,
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 1850.0,
+        "successfulAttestationsSinceProcessStart": 2007.0,
         "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
+        "rewardEthSampled": 5.0908e-05,
         "rewardEffectivenessEpochsSampled": [
-          463242,
-          463241,
-          463240,
-          463239,
-          463238,
-          463237
+          463400,
+          463399,
+          463398,
+          463397,
+          463396,
+          463395
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 14823814,
-        "nextAttestationSlot": 14823814
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
+        "lastAttestedSlot": 14828861,
+        "nextAttestationSlot": 14828875
       }
     },
     {
@@ -249,31 +263,32 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": {
           "head": true,
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 1850.0,
+        "successfulAttestationsSinceProcessStart": 2007.0,
         "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
+        "rewardEthSampled": 5.0908e-05,
         "rewardEffectivenessEpochsSampled": [
-          463242,
-          463241,
-          463240,
-          463239,
-          463238,
-          463237
+          463400,
+          463399,
+          463398,
+          463397,
+          463396,
+          463395
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 14823816,
-        "nextAttestationSlot": 14823816
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
+        "lastAttestedSlot": 14828850,
+        "nextAttestationSlot": 14828880
       }
     },
     {
@@ -285,31 +300,32 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": {
           "head": true,
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 1850.0,
+        "successfulAttestationsSinceProcessStart": 2007.0,
         "participationRatePct": 100.0,
-        "rewardEffectivenessPct": 95.69,
+        "rewardEffectivenessPct": 100.0,
+        "rewardEthSampled": 5.0908e-05,
         "rewardEffectivenessEpochsSampled": [
-          463242,
-          463241,
-          463240,
-          463239,
-          463238,
-          463237
+          463400,
+          463399,
+          463398,
+          463397,
+          463396,
+          463395
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 14823818,
-        "nextAttestationSlot": 14823818
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
+        "lastAttestedSlot": 14828843,
+        "nextAttestationSlot": 14828874
       }
     },
     {
@@ -321,31 +337,32 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": {
           "head": true,
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 1849.0,
-        "participationRatePct": 99.99,
+        "successfulAttestationsSinceProcessStart": 2006.0,
+        "participationRatePct": 99.95,
         "rewardEffectivenessPct": 100.0,
+        "rewardEthSampled": 5.0908e-05,
         "rewardEffectivenessEpochsSampled": [
-          463242,
-          463241,
-          463240,
-          463239,
-          463238,
-          463237
+          463400,
+          463399,
+          463398,
+          463397,
+          463396,
+          463395
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 14823820,
-        "nextAttestationSlot": 14823820
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
+        "lastAttestedSlot": 14828862,
+        "nextAttestationSlot": 14828885
       }
     },
     {
@@ -357,20 +374,21 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": null,
         "successfulAttestationsSinceProcessStart": null,
         "participationRatePct": null,
         "rewardEffectivenessPct": null,
+        "rewardEthSampled": null,
         "rewardEffectivenessEpochsSampled": [],
         "inactivityScore": null,
         "lastAttestedSlot": null,
         "nextAttestationSlot": null
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -382,20 +400,21 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": null,
         "successfulAttestationsSinceProcessStart": null,
         "participationRatePct": null,
         "rewardEffectivenessPct": null,
+        "rewardEthSampled": null,
         "rewardEffectivenessEpochsSampled": [],
         "inactivityScore": null,
         "lastAttestedSlot": null,
         "nextAttestationSlot": null
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
       }
     },
     {
@@ -407,38 +426,41 @@
         "recentSlots": [],
         "lifetimeCount": null
       },
+      "blocksMissed": {
+        "countTracked": 0,
+        "recentSlots": [],
+        "trackedSince": "forward-only, near-head duty scan \u2014 see notes"
+      },
       "attestation": {
         "lastVoteCorrect": {
           "head": true,
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 1849.0,
-        "participationRatePct": 99.99,
+        "successfulAttestationsSinceProcessStart": 2007.0,
+        "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
+        "rewardEthSampled": 5.2497e-05,
         "rewardEffectivenessEpochsSampled": [
-          463242,
-          463241,
-          463240,
-          463239,
-          463238,
-          463237
+          463400,
+          463399,
+          463398,
+          463397,
+          463396,
+          463395
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 14823802,
-        "nextAttestationSlot": 14823829
-      },
-      "blocksMissed": {
-        "countTracked": 0,
-        "recentSlots": [],
-        "trackedSince": "forward-only, near-head duty scan - see notes"
+        "lastAttestedSlot": 14828860,
+        "nextAttestationSlot": 14828888
       }
     }
   ],
   "notes": [
     "No per-validator lifetime block-proposal count exists anywhere on this node (no such metric is exposed, and the REST API has no cumulative/historical proposal endpoint). blocksProposed.lifetimeCount is null everywhere and blocksProposed.countTracked is a REAL but partial count, accumulated run-over-run in scripts/state/proposal_scan_log.json since tracking began (see proposalScan.epochsScannedTotal for exactly how much epoch history has been checked so far) \u2014 commit that state file so future CI runs keep extending coverage instead of restarting from zero.",
+    "blocksMissed is the sibling of blocksProposed, same accumulating state file: a slot counts as a confirmed miss only when the proposer-duty schedule shows one of OUR validators was SCHEDULED for it and no block header exists at that slot. This is possible ONLY within this scan's near-head window (see the timing constraint above) \u2014 there is no way to attribute a historical miss to a specific validator without duty data, which is exactly the same limitation frontend/src/data/blocks.json's own notes describe for scripts/fetch_blocks.py's separate (deeper, but proposed-only) header-walk scan. blocksMissed.countTracked is real but only ever covers time since this tracking began \u2014 never treat it as a lifetime or historical miss rate.",
     "Both the proposer-duty and attestation-rewards beacon REST endpoints only answer quickly (sub-few-seconds) for epochs within roughly the last 5-9 epochs of the current chain head on this node; older epochs measurably time out (tested: 10-15s+ with no response) because Prysm has to replay/regenerate non-cached archived state. This is a real, verified limitation of this specific node's configuration, not a script bug \u2014 it is why both the proposal scan and the reward-effectiveness window below only ever cover a handful of the most recent epochs per run.",
     "attestation.rewardEffectivenessPct is actual-vs-ideal attestation reward (head+target+source points) for the validator's effective-balance tier, averaged over rewardEffectivenessEpochsSampled (a short recent finalized-epoch window, see constraint above) via POST /eth/v1/beacon/rewards/attestations/{epoch}. Only meaningful for active_ongoing validators; withdrawal_done validators show null (they earn no attestation reward once exited).",
+    "attestation.rewardEthSampled is the REAL net attestation reward in ETH (head+target+source+inactivity Gwei amounts straight from the API, summed and converted \u2014 not derived from the percentage) over the exact same rewardEffectivenessEpochsSampled window above. It is a real but very short window (a handful of recent epochs, ~minutes) \u2014 do not treat it as a daily or lifetime reward rate; it is not extrapolated here.",
     "attestation.successfulAttestationsSinceProcessStart is a Prometheus COUNTER that resets on every validator-client process restart (see validatorClientProcessStartedAt) \u2014 it is NOT a lifetime total. participationRatePct divides it by elapsed epochs since that same restart, so it's a rolling rate over the current uptime window only, not the validator's full history.",
     "Metrics-derived fields (lastVoteCorrect, successfulAttestationsSinceProcessStart, inactivityScore, lastAttestedSlot, nextAttestationSlot) are only present for validators the local validator client actively manages \u2014 i.e. status == 'active' \u2014 and are null for withdrawal_done validators, which the metrics endpoint doesn't report on at all."
   ]
