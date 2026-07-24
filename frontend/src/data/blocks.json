@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-07-24T11:19:51.872250+00:00",
+  "generatedAt": "2026-07-24T17:19:50.070316+00:00",
   "method": "beacon-header walk on our own node (Geth + Prysm beacon API); no beaconcha.in, no fabricated figures",
   "depositAddress": "0x95aed4dc9acc614415d3bc56711998b8041878eb",
   "scanProgress": {
-    "headSlot": 14838996,
+    "headSlot": 14840796,
     "oldestValidatorActivationSlot": 17792,
     "scannedRanges": [
       [
@@ -12,10 +12,10 @@
       ],
       [
         14803729,
-        14838996
+        14840796
       ]
     ],
-    "slotsScannedTotal": 55269,
+    "slotsScannedTotal": 57069,
     "fullHistoryComplete": false
   },
   "proposals": [
@@ -51,7 +51,7 @@
   "totalPriorityFeeRevenueEth": 0.117802,
   "notes": [
     "Proposed-block discovery walks realized beacon headers (GET /eth/v1/beacon/headers/{slot}) and matches each block's proposer_index against our validator set \u2014 this reads already-finalized chain data, not scheduled-duty state, so (unlike fetch_performance.py's duty scan) it works at any historical depth on this node, not just near head.",
-    "Coverage so far: 55269 slot(s) scanned across 2 range(s); fullHistoryComplete=False. A full walk from head (14838996) back to our oldest validator's activation slot (17792) is a multi-million-slot job \u2014 this script is designed to be re-run repeatedly (e.g. on a schedule), extending scanProgress each time via scripts/state/block_history_scan_log.json (committed to the repo), rather than attempt it in one run.",
+    "Coverage so far: 57069 slot(s) scanned across 2 range(s); fullHistoryComplete=False. A full walk from head (14840796) back to our oldest validator's activation slot (17792) is a multi-million-slot job \u2014 this script is designed to be re-run repeatedly (e.g. on a schedule), extending scanProgress each time via scripts/state/block_history_scan_log.json (committed to the repo), rather than attempt it in one run.",
     "MISSED slots are intentionally NOT reported here. A header-walk can tell you a slot had no block at all, but not WHO was assigned to it \u2014 that needs the proposer-duty schedule, which (per fetch_performance.py's own documented, re-verified constraint) this node can only compute cheaply for roughly the last 5-9 epochs of head; older epochs require beacon-state regeneration that times out. So a slot missed by SOME validator among >1,000,000 active mainnet validators can't be attributed to specifically ours at historical depth \u2014 only fetch_performance.py's near-head duty scan (confirmedMisses) can honestly claim a miss was ours, and only going forward from whenever that tracking started.",
     "Each confirmed proposal's priorityFeeRevenueEth uses the same method as fetch_earnings.py: eth_getBlockReceipts, sum((effectiveGasPrice - baseFeePerGas) * gasUsed). builderPaymentNote is the same unverified 21000-gas-last-tx heuristic used there \u2014 treat revenue as priority-fee only, it may undercount true block value if a real builder payment is present.",
     "With 13 of >1,000,000 active mainnet validators, real proposal frequency for the whole fleet is roughly one every 1-2 months (confirmed empirically: fetch_earnings.py's own most recent 20000-slot/~2.8-day scan found zero) \u2014 a short list here, growing slowly as coverage extends and time passes, is the expected honest outcome, not a bug."
