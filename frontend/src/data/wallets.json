@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-28T23:17:44.992145+00:00",
+  "generatedAt": "2026-07-29T05:19:45.276862+00:00",
   "method": "eth_getBalance (Geth JSON-RPC, 'latest') against the home node over ethereum-wg",
   "nodeSource": "http://localhost:8545",
   "wallets": [
@@ -36,7 +36,7 @@
     {
       "address": "0x1bbdD9733Cc44A52b7b3eEEf3ef6cA82dBE2B912",
       "alias": "Validator 4 Tip Jar",
-      "balanceEth": 0.011812,
+      "balanceEth": 0.014036,
       "validatorIndices": [
         47553,
         2032648
