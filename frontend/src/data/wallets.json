@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-14T17:19:44.132254+00:00",
+  "generatedAt": "2026-08-14T23:16:13.935130+00:00",
   "method": "eth_getBalance (Geth JSON-RPC, 'latest') against the home node over ethereum-wg",
   "nodeSource": "http://localhost:8545",
   "wallets": [
