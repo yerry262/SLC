@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-08-20T05:20:50.106370+00:00",
+  "generatedAt": "2026-08-20T11:20:50.429524+00:00",
   "method": "live chain data (Geth + Prysm beacon API on our own node); no beaconcha.in, no fabricated figures",
   "depositAddress": "0x95aed4dc9acc614415d3bc56711998b8041878eb",
   "feeRecipientConfigSource": "validator_tip.json read locally on the node",
   "defaultFeeRecipient": "0x1bbdD9733Cc44A52b7b3eEEf3ef6cA82dBE2B912",
   "scanWindow": {
-    "headSlot": 15031601,
-    "fromSlot": 15011602,
-    "toSlot": 15031601,
+    "headSlot": 15033401,
+    "fromSlot": 15013402,
+    "toSlot": 15033401,
     "slotsScanned": 20000,
     "daysScanned": 2.78
   },
@@ -185,7 +185,7 @@
   "notes": [
     "EL tips are computed from raw chain data on our own node (Geth eth_getBlockByNumber + eth_getBlockReceipts: sum((effectiveGasPrice - baseFeePerGas) * gasUsed) per tx). beaconcha.in is NOT used as a source \u2014 its HTML validator page 403s (bot-protected) and its JSON API key is zero-quota, both confirmed live during this research.",
     "DEPOSIT_ADDRESS (0x95aed...878eb) is NOT the active fee recipient \u2014 it's only a commented-out `suggested-fee-recipient` in validator.yaml/beacon.yaml. The real, active fee_recipient is per-validator-pubkey, set in ~/prysm/configs/validator_tip.json on the node (`proposer-settings-file`), with a default_config fallback for unlisted pubkeys. This script reads that file live over SSH each run (ethereum-wg); if SSH fails, feeRecipient fields are null, never guessed.",
-    "Proposal detection: walked beacon headers backward via GET /eth/v1/beacon/headers/{slot} from head slot 15031601 for 20000 slots (~2.78 days), matching proposer_index against our validator set. `/eth/v1/validator/duties/proposer/{epoch}` was tried and is NOT usable on this node for anything but the current epoch \u2014 it requires beacon-state regeneration this node doesn't keep, and timed out (>30s) even on an epoch only ~40 min old.",
+    "Proposal detection: walked beacon headers backward via GET /eth/v1/beacon/headers/{slot} from head slot 15033401 for 20000 slots (~2.78 days), matching proposer_index against our validator set. `/eth/v1/validator/duties/proposer/{epoch}` was tried and is NOT usable on this node for anything but the current epoch \u2014 it requires beacon-state regeneration this node doesn't keep, and timed out (>30s) even on an epoch only ~40 min old.",
     "With 13 of >1,000,000 active mainnet validators, expected proposal frequency for the whole fleet is roughly one every 1-2 months, so a multi-thousand-slot scan finding zero matches is the expected/honest outcome, not a bug. confirmedProposalCount/confirmedTipsEthInScanWindow reflect ONLY what was found in the scanned window above \u2014 they are real measured zeros, not lifetime totals.",
     "lifetimeProposalCount/lifetimeTipsEth are null (genuinely unknown from this script) for every validator. The correct source for full lifetime proposal history is Prysm's own slashing-protection BoltDB (/mnt/ssd1/.eth2/validator.db, `proposal-history-bucket-interchange`), exportable via `prysm.sh validator slashing-protection-history export`. That export was attempted during research and failed with 'cannot obtain database lock' because prysm-validator.service has it open live \u2014 exporting it needs a brief, deliberate stop of that service, not done automatically by this script without a go-ahead.",
     "The builder-payment heuristic (builderPaymentNote: flags a block's last tx if it's a plain 21000-gas transfer, since 12/13 of our validators run with builder.enabled=true via MEV-Boost, confirmed live: mevboost.service running with 8 relays) is UNVERIFIED against any real example of ours \u2014 the scan found none. Treat confirmedTipsEthInScanWindow as priority-fee revenue only; it may undercount true block value if a real proposal ever lands and includes a builder payment.",
