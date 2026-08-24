@@ -6,7 +6,7 @@
     ],
     [
       14803729,
-      15062181
+      15063993
     ]
   ],
   "confirmedProposals": [
@@ -48,6 +48,16 @@
       "matchesExpectedFeeRecipient": null,
       "priorityFeeRevenueEth": 0.002223692,
       "txCount": 83,
+      "builderPaymentNote": null
+    },
+    {
+      "slot": 15063010,
+      "validatorIndex": 47553,
+      "blockNumber": 25825506,
+      "miner": "0x1bbdd9733cc44a52b7b3eeef3ef6ca82dbe2b912",
+      "matchesExpectedFeeRecipient": null,
+      "priorityFeeRevenueEth": 0.006235026,
+      "txCount": 156,
       "builderPaymentNote": null
     }
   ]
