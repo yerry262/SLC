@@ -821,8 +821,20 @@
     471028,
     471029,
     471030,
-    471031
+    471031,
+    471081,
+    471082,
+    471083,
+    471084,
+    471085,
+    471086
   ],
-  "confirmedProposals": [],
+  "confirmedProposals": [
+    {
+      "epoch": 471083,
+      "slot": 15074673,
+      "validatorIndex": 2032648
+    }
+  ],
   "confirmedMisses": []
 }
