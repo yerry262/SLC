@@ -65,9 +65,10 @@ no key/secret is ever shipped to the client bundle.
 
 ## Deployment Status
 
-- **Live**: https://yerry262.github.io/SLC
+- **Live**: https://yerry262.github.io/SLC/ (repo public + Pages enabled
+  2026-07-22, `build_type=workflow`; every push to `main` — including the
+  node's automated snapshot commits — redeploys)
 - **GitHub**: https://github.com/yerry262/SLC
-- **Last Deploy**: not yet deployed (Stage 1 scaffold merged, data panels wired)
 
 ## Env vars / secrets
 
@@ -79,12 +80,10 @@ no key/secret is ever shipped to the client bundle.
 
 ## Known Limitations
 
-- Repo is private; GitHub Pages built from a private repo may still be
-  publicly reachable at its URL depending on GitHub plan — verify visibility
-  before publishing real balance/earnings figures.
-- Phase 1's data source (local node) requires a CI runner that can reach the
-  home mesh — needs a decision (self-hosted runner setup) before that stage
-  can be built.
+- Repo is **public** (made public 2026-07-22 so GitHub Pages could serve the
+  site — yerry's explicit call, aware it publishes real balance/earnings
+  figures). Don't flip it back private without checking: that kills the
+  Pages site on the free plan.
 
 ## Last Updated
 
