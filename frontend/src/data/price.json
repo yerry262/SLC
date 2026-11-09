@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-09T00:21:17.872780+00:00",
+  "generatedAt": "2026-11-09T06:17:21.699109+00:00",
   "source": "coingecko (public, no key)",
-  "ethUsd": 2130.73,
+  "ethUsd": 2127.0,
   "marketCapsSource": "coingecko (public, no key)",
-  "totalCryptoMarketCapUsd": 2490240624588,
-  "btcMarketCapUsd": 1504703568140,
-  "ethMarketCapUsd": 260539774632
+  "totalCryptoMarketCapUsd": 2482169825424,
+  "btcMarketCapUsd": 1497402316285,
+  "ethMarketCapUsd": 260014661317
 }
