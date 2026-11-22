@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-11-22T06:16:27.858246+00:00",
-  "currentEpoch": 490896,
-  "currentSlot": 15708679,
+  "generatedAt": "2026-11-22T12:21:46.411055+00:00",
+  "currentEpoch": 490953,
+  "currentSlot": 15710506,
   "validatorClientProcessStartedAt": "2026-11-19T04:30:10.800000+00:00",
   "proposalScan": {
-    "epochsScannedTotal": 2466,
+    "epochsScannedTotal": 2472,
     "epochsScannedThisRun": [
-      490896,
-      490895,
-      490894,
-      490893,
-      490892,
-      490891
+      490953,
+      490952,
+      490951,
+      490950,
+      490949,
+      490948
     ],
     "totalConfirmedProposalsTracked": 1,
     "totalConfirmedMissesTracked": 0
@@ -37,21 +37,21 @@
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 691.0,
-        "participationRatePct": 99.91,
+        "successfulAttestationsSinceProcessStart": 749.0,
+        "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
-        "rewardEthSampled": 4.895e-05,
+        "rewardEthSampled": 4.8744e-05,
         "rewardEffectivenessEpochsSampled": [
-          490894,
-          490893,
-          490892,
-          490891,
-          490890,
-          490889
+          490951,
+          490950,
+          490949,
+          490948,
+          490947,
+          490946
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 15708661,
-        "nextAttestationSlot": 15708697
+        "lastAttestedSlot": 15710496,
+        "nextAttestationSlot": 15710496
       }
     },
     {
@@ -74,21 +74,21 @@
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 691.0,
-        "participationRatePct": 99.91,
+        "successfulAttestationsSinceProcessStart": 749.0,
+        "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
-        "rewardEthSampled": 4.895e-05,
+        "rewardEthSampled": 4.8744e-05,
         "rewardEffectivenessEpochsSampled": [
-          490894,
-          490893,
-          490892,
-          490891,
-          490890,
-          490889
+          490951,
+          490950,
+          490949,
+          490948,
+          490947,
+          490946
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 15708670,
-        "nextAttestationSlot": 15708681
+        "lastAttestedSlot": 15710501,
+        "nextAttestationSlot": 15710501
       }
     },
     {
@@ -111,21 +111,21 @@
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 692.0,
+        "successfulAttestationsSinceProcessStart": 749.0,
         "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
-        "rewardEthSampled": 4.895e-05,
+        "rewardEthSampled": 4.8744e-05,
         "rewardEffectivenessEpochsSampled": [
-          490894,
-          490893,
-          490892,
-          490891,
-          490890,
-          490889
+          490951,
+          490950,
+          490949,
+          490948,
+          490947,
+          490946
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 15708642,
-        "nextAttestationSlot": 15708699
+        "lastAttestedSlot": 15710490,
+        "nextAttestationSlot": 15710514
       }
     },
     {
@@ -148,21 +148,21 @@
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 691.0,
+        "successfulAttestationsSinceProcessStart": 748.0,
         "participationRatePct": 99.91,
         "rewardEffectivenessPct": 100.0,
-        "rewardEthSampled": 4.895e-05,
+        "rewardEthSampled": 4.8744e-05,
         "rewardEffectivenessEpochsSampled": [
-          490894,
-          490893,
-          490892,
-          490891,
-          490890,
-          490889
+          490951,
+          490950,
+          490949,
+          490948,
+          490947,
+          490946
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 15708643,
-        "nextAttestationSlot": 15708687
+        "lastAttestedSlot": 15710471,
+        "nextAttestationSlot": 15710519
       }
     },
     {
@@ -237,21 +237,21 @@
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 691.0,
+        "successfulAttestationsSinceProcessStart": 748.0,
         "participationRatePct": 99.91,
         "rewardEffectivenessPct": 100.0,
-        "rewardEthSampled": 4.895e-05,
+        "rewardEthSampled": 4.8744e-05,
         "rewardEffectivenessEpochsSampled": [
-          490894,
-          490893,
-          490892,
-          490891,
-          490890,
-          490889
+          490951,
+          490950,
+          490949,
+          490948,
+          490947,
+          490946
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 15708643,
-        "nextAttestationSlot": 15708698
+        "lastAttestedSlot": 15710482,
+        "nextAttestationSlot": 15710523
       }
     },
     {
@@ -274,21 +274,21 @@
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 692.0,
+        "successfulAttestationsSinceProcessStart": 749.0,
         "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
-        "rewardEthSampled": 4.895e-05,
+        "rewardEthSampled": 4.8744e-05,
         "rewardEffectivenessEpochsSampled": [
-          490894,
-          490893,
-          490892,
-          490891,
-          490890,
-          490889
+          490951,
+          490950,
+          490949,
+          490948,
+          490947,
+          490946
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 15708674,
-        "nextAttestationSlot": 15708674
+        "lastAttestedSlot": 15710504,
+        "nextAttestationSlot": 15710504
       }
     },
     {
@@ -311,21 +311,21 @@
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 691.0,
-        "participationRatePct": 99.91,
+        "successfulAttestationsSinceProcessStart": 749.0,
+        "participationRatePct": 100.0,
         "rewardEffectivenessPct": 100.0,
-        "rewardEthSampled": 4.895e-05,
+        "rewardEthSampled": 4.8744e-05,
         "rewardEffectivenessEpochsSampled": [
-          490894,
-          490893,
-          490892,
-          490891,
-          490890,
-          490889
+          490951,
+          490950,
+          490949,
+          490948,
+          490947,
+          490946
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 15708648,
-        "nextAttestationSlot": 15708696
+        "lastAttestedSlot": 15710506,
+        "nextAttestationSlot": 15710506
       }
     },
     {
@@ -348,21 +348,21 @@
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 691.0,
+        "successfulAttestationsSinceProcessStart": 748.0,
         "participationRatePct": 99.91,
         "rewardEffectivenessPct": 100.0,
-        "rewardEthSampled": 4.895e-05,
+        "rewardEthSampled": 4.8744e-05,
         "rewardEffectivenessEpochsSampled": [
-          490894,
-          490893,
-          490892,
-          490891,
-          490890,
-          490889
+          490951,
+          490950,
+          490949,
+          490948,
+          490947,
+          490946
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 15708652,
-        "nextAttestationSlot": 15708688
+        "lastAttestedSlot": 15710470,
+        "nextAttestationSlot": 15710521
       }
     },
     {
@@ -439,21 +439,21 @@
           "source": true,
           "target": true
         },
-        "successfulAttestationsSinceProcessStart": 692.0,
-        "participationRatePct": 100.0,
+        "successfulAttestationsSinceProcessStart": 748.0,
+        "participationRatePct": 99.91,
         "rewardEffectivenessPct": 100.0,
-        "rewardEthSampled": 5.2008e-05,
+        "rewardEthSampled": 5.1789e-05,
         "rewardEffectivenessEpochsSampled": [
-          490894,
-          490893,
-          490892,
-          490891,
-          490890,
-          490889
+          490951,
+          490950,
+          490949,
+          490948,
+          490947,
+          490946
         ],
         "inactivityScore": 0.0,
-        "lastAttestedSlot": 15708672,
-        "nextAttestationSlot": 15708672
+        "lastAttestedSlot": 15710468,
+        "nextAttestationSlot": 15710526
       }
     }
   ],
